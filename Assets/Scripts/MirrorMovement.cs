@@ -18,7 +18,7 @@ public class MirrorMovement : MonoBehaviour
             movementScript.setMirror(null);
         }
         else {
-            movementScript.setMirror(transform.parent.gameObject);
+            movementScript.setMirror(transform.gameObject);
         }
     }
 }

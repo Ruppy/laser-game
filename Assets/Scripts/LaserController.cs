@@ -11,6 +11,7 @@ public class LaserController : MonoBehaviour
     private Vector3 initialRaycastPosition;
     public LayerMask layerMask;
     public float laserOffset = 0.05f;
+    public string hitIdentifier = "";
     private MirrorController lastMirror;
 
     // Start is called before the first frame update
@@ -48,18 +49,19 @@ public class LaserController : MonoBehaviour
 
           //Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0) - initialRaycastPosition;
           Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0);
-          Debug.Log("Before hit " + hitPosition + " Line: " + line.positionCount);
+          //Debug.Log("Before hit " + hitPosition + " Line: " + line.positionCount);
           //line.SetPosition(line.positionCount - 1, hitPosition);
           line.SetPosition(line.positionCount - 3, transform.InverseTransformPoint(hitPosition));
           line.SetPosition(line.positionCount - 2, transform.InverseTransformPoint(hitPosition));
           line.SetPosition(line.positionCount - 1, transform.InverseTransformPoint(hitPosition));
           //line.SetPosition(line.positionCount - 1, hitPosition);
 
-          MirrorController mirror = hit.collider.gameObject.transform.parent.GetComponent<MirrorController>();
-          if (mirror) {
-              GameObject mirrorGameObject = hit.collider.gameObject;
+          GameObject hitObject = hit.collider.gameObject;
+          //MirrorController mirror = hit.collider.gameObject.transform.parent.GetComponent<MirrorController>();
+          if (hitObject.CompareTag("Mirror")) {
+              GameObject mirrorGameObject = hitObject;
 
-              Debug.Log("its a hit mirror");
+              //Debug.Log("its a hit mirror");
 
               if (lastCollideObject == gameObject) {
                 reflectionAngle = Vector3.Reflect(lastCollideObject.transform.right, hit.normal);
@@ -79,6 +81,13 @@ public class LaserController : MonoBehaviour
               hit = Physics2D.Raycast(hitPosition, reflectionAngle, lineLength, layerMask);
               mirrorGameObject.layer = currentLayer;
               lastCollideObject = mirrorGameObject;
+          }
+          else if (hitObject.CompareTag("Box")) {
+            Debug.Log("Laser hit box");
+            GameObject boxGameObject = hitObject;
+            BoxController boxController = boxGameObject.GetComponent<BoxController>();
+            boxController.Hit(hitIdentifier);
+            break;
           }
           else {
             Debug.Log("its a hit wall " + line.positionCount);

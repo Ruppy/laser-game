@@ -19,11 +19,9 @@ public class LaserController : MonoBehaviour
     {
         line = GetComponent<LineRenderer>();
         if (transform.parent == null) {
-          Debug.Log("no parent");
           line.enabled = true;
         }
         else {
-          Debug.Log("parent");
           line.enabled = false;
         }
     }
@@ -42,26 +40,17 @@ public class LaserController : MonoBehaviour
 
         while (hit) {
 
-          //line.positionCount += 1;
           line.positionCount += 3;
-          Debug.Log("Line total " + line.positionCount);
           if (line.positionCount > 20) { break; }
 
-          //Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0) - initialRaycastPosition;
           Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0);
-          //Debug.Log("Before hit " + hitPosition + " Line: " + line.positionCount);
-          //line.SetPosition(line.positionCount - 1, hitPosition);
           line.SetPosition(line.positionCount - 3, transform.InverseTransformPoint(hitPosition));
           line.SetPosition(line.positionCount - 2, transform.InverseTransformPoint(hitPosition));
           line.SetPosition(line.positionCount - 1, transform.InverseTransformPoint(hitPosition));
-          //line.SetPosition(line.positionCount - 1, hitPosition);
 
           GameObject hitObject = hit.collider.gameObject;
-          //MirrorController mirror = hit.collider.gameObject.transform.parent.GetComponent<MirrorController>();
           if (hitObject.CompareTag("Mirror")) {
               GameObject mirrorGameObject = hitObject;
-
-              //Debug.Log("its a hit mirror");
 
               if (lastCollideObject == gameObject) {
                 reflectionAngle = Vector3.Reflect(lastCollideObject.transform.right, hit.normal);
@@ -69,11 +58,8 @@ public class LaserController : MonoBehaviour
               else {
                 reflectionAngle = Vector3.Reflect(reflectionAngle, hit.normal);
               }
-              //Debug.Log("Angle" + reflectionAngle);
 
               Debug.DrawRay(hitPosition - new Vector3(0.01f, 0, 0), reflectionAngle * lineLength, Color.white);
-              //break;
-
 
               int currentLayer = mirrorGameObject.layer;
               mirrorGameObject.layer = 2;
@@ -83,14 +69,12 @@ public class LaserController : MonoBehaviour
               lastCollideObject = mirrorGameObject;
           }
           else if (hitObject.CompareTag("Box")) {
-            Debug.Log("Laser hit box");
             GameObject boxGameObject = hitObject;
             BoxController boxController = boxGameObject.GetComponent<BoxController>();
             boxController.Hit(hitIdentifier);
             break;
           }
           else {
-            Debug.Log("its a hit wall " + line.positionCount);
             break;
           }
         }

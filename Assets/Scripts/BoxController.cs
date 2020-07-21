@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
-    public float hitDelay = 0.25f;
+    public float hitDelay = 0.15f;
     public string hitIdentifier = "";
 
     private bool isGlowing = false;
@@ -12,13 +12,19 @@ public class BoxController : MonoBehaviour
     private float hitTime = 0f;
     private float timeSinceLastHit = 0f;
 
-    private Shader spriteShader;
-    private Shader glowShader;
+    public Material glowMaterial;
+    private Material spriteMaterial;
+
+    private CameraController cameraController;
+    private Camera camera;
+    private SpriteRenderer renderer;
 
     void Start()
     {
-        spriteShader = Shader.Find("Sprites/Default");
-        glowShader = Shader.Find("Shader Graphs/BoxShader");
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        renderer = GetComponent<SpriteRenderer>();
+        spriteMaterial = renderer.material;
     }
 
     void Update() {
@@ -30,11 +36,9 @@ public class BoxController : MonoBehaviour
             timeSinceLastHit += Time.deltaTime;
         }
         isHit = false;
-
         if (timeSinceLastHit >= hitDelay) {
             DisableHit();
         }
-
         /*
         if (isHit && hitTime > hitDelay) {
             isGlowing = true;
@@ -53,15 +57,20 @@ public class BoxController : MonoBehaviour
         if (isGlowing) { return; }
         isGlowing = true;
 
-        if (GetComponent<Renderer>().material.shader == spriteShader) {
-            GetComponent<Renderer>().material.shader = glowShader;
+        if (renderer.material == spriteMaterial) {
+            renderer.material = glowMaterial;
+            cameraController.ChangeColor(renderer.color);
         }
+        /*else {
+            cameraController.HitColor(renderer.color);
+        }*/
     }
 
     public void DisableHit() {
         isGlowing = false;
-        if (GetComponent<Renderer>().material.shader == glowShader) {
-            GetComponent<Renderer>().material.shader = spriteShader;
+        if (renderer.sharedMaterial == glowMaterial) {
+            renderer.material = spriteMaterial;
+            //cameraController.CancelChangeColor();
         }
     }
 

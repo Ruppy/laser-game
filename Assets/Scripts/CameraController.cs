@@ -12,14 +12,17 @@ public class CameraController : MonoBehaviour
     private float timePassed = 0f;
     private bool enabled = false;
     private bool isCanceling = false;
+    private bool shouldWarnStepChange = true;
     private MovementController movementScript;
+    private GameObject scriptsObject;
 
     void Start() {
         camera = GetComponent<Camera>();
         changeFromColor = camera.backgroundColor;
         changeToColor = camera.backgroundColor;
         enabled = false;
-        movementScript = GameObject.Find("Scripts").GetComponent<MovementController>();
+        scriptsObject = GameObject.Find("Scripts");
+        movementScript = scriptsObject.GetComponent<MovementController>();
     }
 
     void Update() {
@@ -35,9 +38,15 @@ public class CameraController : MonoBehaviour
 
         camera.backgroundColor = Color.Lerp(changeFromColor, changeToColor, timePassed/changeColorDuration);
 
+        if (shouldWarnStepChange) {
+            scriptsObject.SendMessage("IncreaseStep");
+            shouldWarnStepChange = false;
+        }
+
         if (timePassed > changeColorDuration || timePassed < 0) {
             enabled = false;
             isCanceling = false;
+            shouldWarnStepChange = true;
         }
     }
 

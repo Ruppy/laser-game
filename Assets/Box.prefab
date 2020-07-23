@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6306998039477059290}
   - component: {fileID: 6306998039477059285}
   - component: {fileID: 9068101031139923165}
+  - component: {fileID: 5077913998646596}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -132,8 +133,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6306998039477059289}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dc010a92e2b84dfbab0a9f49197ab1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5077913998646596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6306998039477059289}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04a7662abbdf473bbe0c448466ccf2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -36,7 +36,7 @@ public class BoxController : MonoBehaviour
             timeSinceLastHit += Time.deltaTime;
         }
         isHit = false;
-        if (timeSinceLastHit >= hitDelay) {
+        if (isGlowing && timeSinceLastHit >= hitDelay) {
             DisableHit();
         }
         /*

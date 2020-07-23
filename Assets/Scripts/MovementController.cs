@@ -19,6 +19,12 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         if (mirror == null) { return; }
+        float rotationDelta = 0;
+
+        if (Input.GetMouseButton(1))
+        {
+            rotationDelta = 15f;
+        }
 
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
@@ -29,7 +35,6 @@ public class MovementController : MonoBehaviour
             rotateEnabled = rotatedSecondsAgo > 0.05;
         }
         else {
-            float rotationDelta = 0;
             if (Input.GetKey("z")) {
               rotationDelta = 3f;
             }

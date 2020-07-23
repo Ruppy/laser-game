@@ -19,10 +19,10 @@ public class LaserController : MonoBehaviour
     {
         line = GetComponent<LineRenderer>();
         if (transform.parent == null) {
-          line.enabled = true;
+          //line.enabled = true;
         }
         else {
-          line.enabled = false;
+          //line.enabled = false;
         }
     }
 

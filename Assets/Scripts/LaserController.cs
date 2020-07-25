@@ -14,16 +14,18 @@ public class LaserController : MonoBehaviour
     public string hitIdentifier = "";
     private MirrorController lastMirror;
 
+    private BoxController hittingController;
+
     // Start is called before the first frame update
     void Start()
     {
         line = GetComponent<LineRenderer>();
         if (transform.parent == null) {
-          Debug.Log("no parent");
+          //Debug.Log("no parent");
           line.enabled = true;
         }
         else {
-          Debug.Log("parent");
+          //Debug.Log("parent");
           line.enabled = false;
         }
     }
@@ -44,7 +46,7 @@ public class LaserController : MonoBehaviour
 
           //line.positionCount += 1;
           line.positionCount += 3;
-          Debug.Log("Line total " + line.positionCount);
+          //Debug.Log("Line total " + line.positionCount);
           if (line.positionCount > 20) { break; }
 
           //Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0) - initialRaycastPosition;
@@ -83,16 +85,21 @@ public class LaserController : MonoBehaviour
               lastCollideObject = mirrorGameObject;
           }
           else if (hitObject.CompareTag("Box")) {
-            Debug.Log("Laser hit box");
             GameObject boxGameObject = hitObject;
-            BoxController boxController = boxGameObject.GetComponent<BoxController>();
-            boxController.Hit(hitIdentifier);
+            BoxController box = boxGameObject.GetComponent<BoxController>();
+            if (hittingController != null && box != hittingController) {
+                hittingController.DisableHit(hitIdentifier);
+            }
+            hittingController = box;
+            hittingController.Hit(hitIdentifier);
             break;
           }
-          else {
-            Debug.Log("its a hit wall " + line.positionCount);
+          else { //hit wall
+            if (hittingController != null) {
+                hittingController.DisableHit(hitIdentifier);
+            }
             break;
           }
-        }
+        }        
     }
 }

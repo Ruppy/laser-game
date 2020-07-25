@@ -1,19 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxController : MonoBehaviour
+public abstract class BoxController : MonoBehaviour
 {
-    public float hitDelay = 0.25f;
-    public string hitIdentifier = "";
+    
+    public List<string> hitIdentifier = new List<string>();
 
-    private bool isGlowing = false;
-    private bool isHit = false;
-    private float hitTime = 0f;
-    private float timeSinceLastHit = 0f;
+    protected Shader spriteShader;
+    protected Shader glowShader;
 
-    private Shader spriteShader;
-    private Shader glowShader;
+    protected List<string> lasersHitting = new List<string>();
 
     void Start()
     {
@@ -22,46 +20,43 @@ public class BoxController : MonoBehaviour
     }
 
     void Update() {
-        if (isHit) {
-            hitTime += Time.deltaTime;
-            timeSinceLastHit = 0;
-        }
-        else {
-            timeSinceLastHit += Time.deltaTime;
-        }
-        isHit = false;
-
-        if (timeSinceLastHit >= hitDelay) {
-            DisableHit();
-        }
-
-        /*
-        if (isHit && hitTime > hitDelay) {
-            isGlowing = true;
-        }
-
-        if (isGlowing) {
-            if (GetComponent<Renderer>().material == spriteShader) {
-                GetComponent<Renderer>().material = glowShader;
-            }
-        }*/
+        
     }
+
+    public abstract void behaviourOnAllLasersHitting();
+
+    public abstract void behaviourOnLaserOff();
 
     public void Hit(string laserIdentifier) {
-        if (laserIdentifier != hitIdentifier) { return; }
-        isHit = true;
-        if (isGlowing) { return; }
-        isGlowing = true;
-
-        if (GetComponent<Renderer>().material.shader == spriteShader) {
-            GetComponent<Renderer>().material.shader = glowShader;
+        AddLaserHitting(laserIdentifier);
+        if (AllLasersAreHitting()) {
+            behaviourOnAllLasersHitting();
         }
     }
 
-    public void DisableHit() {
-        isGlowing = false;
-        if (GetComponent<Renderer>().material.shader == glowShader) {
-            GetComponent<Renderer>().material.shader = spriteShader;
+    public void DisableHit(string laserIdentifier) {
+        lasersHitting.Remove(laserIdentifier);
+        if (!AllLasersAreHitting()) {
+            behaviourOnLaserOff();
+        }
+    }
+
+    protected bool AllLasersAreHitting() {
+        int count = 0;
+        foreach (string requiredLaser in hitIdentifier) {
+            foreach (string hittingLaser in lasersHitting) {
+                if (hittingLaser == requiredLaser) {
+                    count++;
+                }
+            }
+        }
+        return count == hitIdentifier.Count;
+    }
+
+    protected void AddLaserHitting(string laserIdentifier) {
+        bool alreadyHitting = lasersHitting.Contains(laserIdentifier);
+        if (!alreadyHitting) {
+            lasersHitting.Add(laserIdentifier);
         }
     }
 

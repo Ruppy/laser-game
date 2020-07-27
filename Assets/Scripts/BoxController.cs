@@ -70,7 +70,7 @@ public class BoxController : MonoBehaviour
         isGlowing = false;
         if (renderer.sharedMaterial == glowMaterial) {
             renderer.material = spriteMaterial;
-            //cameraController.CancelChangeColor();
+            cameraController.CancelChangeColor();
         }
     }
 

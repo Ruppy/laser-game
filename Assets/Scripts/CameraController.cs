@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -30,7 +31,7 @@ public class CameraController : MonoBehaviour
         if (movementScript.isMoving()) { return; }
 
         if (isCanceling) {
-            timePassed -= Time.deltaTime;
+            //timePassed -= Time.deltaTime;
         }
         else {
             timePassed += Time.deltaTime;

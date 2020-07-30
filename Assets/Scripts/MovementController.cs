@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
     public GameObject mirror;
     public float speed = 10f;
+    public bool movementLock = false;
 
     private bool rotateEnabled = true;
     private float rotatedSecondsAgo = 0f;
@@ -26,9 +27,12 @@ public class MovementController : MonoBehaviour
             rotationDelta = 15f;
         }
 
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-        mirror.transform.position = curPosition;
+
+        if (movementLock == false) {
+            Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+            mirror.transform.position = curPosition;
+        }
 
         if (rotateEnabled == false) {
             rotatedSecondsAgo += Time.deltaTime;

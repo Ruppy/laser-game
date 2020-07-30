@@ -17,6 +17,29 @@ public class CameraController : MonoBehaviour
     private MovementController movementScript;
     private GameObject scriptsObject;
 
+    private float timeSinceLastGlowingBoxEvent = 0f;
+
+    private void OnEnable() {
+        EventHandler.onMainBoxGlowing += OnMainBoxGlowing;
+        EventHandler.onMainBoxDulling += onMainBoxDulling;
+    }
+
+
+    private void OnDisable() {
+        EventHandler.onMainBoxGlowing -= OnMainBoxGlowing;
+        EventHandler.onMainBoxDulling -= onMainBoxDulling;
+    }
+
+    public void OnMainBoxGlowing(BoxController boxController) {
+        timeSinceLastGlowingBoxEvent = 0f;
+        enabled = true;
+        ChangeColor(boxController.GetComponent<SpriteRenderer>().color);
+    }
+
+    public void onMainBoxDulling(BoxController boxController) {
+        enabled = false;
+    }
+
     void Start() {
         camera = GetComponent<Camera>();
         changeFromColor = camera.backgroundColor;

@@ -7,71 +7,58 @@ public class BoxController : MonoBehaviour
     public float hitDelay = 0.15f;
     public string hitIdentifier = "";
 
-    private bool isGlowing = false;
-    private bool isHit = false;
-    private float hitTime = 0f;
+    private bool isBeingHit = false;
     private float timeSinceLastHit = 0f;
 
     public Material glowMaterial;
     private Material spriteMaterial;
 
-    private CameraController cameraController;
-    private Camera camera;
     private SpriteRenderer renderer;
+
+    private EventHandler eventHandler = EventHandler.get();
+
+    private void OnEnable() {
+        EventHandler.onLaserHit += boxBeingHit;
+        EventHandler.onLaserStoppedHittingBox += boxStoppedBeingHit;
+    }
+
+    private void OnDisable() {
+        EventHandler.onLaserHit -= boxBeingHit;
+        EventHandler.onLaserStoppedHittingBox -= boxStoppedBeingHit;
+    }
+
+    public void boxBeingHit(LaserController laserController, BoxController boxController) {
+        isBeingHit = true;
+        timeSinceLastHit = Time.deltaTime;
+    }
+
+    public void boxStoppedBeingHit(LaserController laserController, BoxController boxController) {
+        isBeingHit = false;
+    }
 
     void Start()
     {
-        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-        cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
         renderer = GetComponent<SpriteRenderer>();
         spriteMaterial = renderer.material;
     }
 
     void Update() {
-        if (isHit) {
-            hitTime += Time.deltaTime;
-            timeSinceLastHit = 0;
+        if (isBeingHit) {
+            Glow();
         }
         else {
-            timeSinceLastHit += Time.deltaTime;
+            Dull();
         }
-        isHit = false;
-        if (isGlowing && timeSinceLastHit >= hitDelay) {
-            DisableHit();
-        }
-        /*
-        if (isHit && hitTime > hitDelay) {
-            isGlowing = true;
-        }
-
-        if (isGlowing) {
-            if (GetComponent<Renderer>().material == spriteShader) {
-                GetComponent<Renderer>().material = glowShader;
-            }
-        }*/
     }
 
-    public void Hit(string laserIdentifier) {
-        if (laserIdentifier != hitIdentifier) { return; }
-        isHit = true;
-        if (isGlowing) { return; }
-        isGlowing = true;
-
-        if (renderer.material == spriteMaterial) {
-            renderer.material = glowMaterial;
-            cameraController.ChangeColor(renderer.color);
-        }
-        /*else {
-            cameraController.HitColor(renderer.color);
-        }*/
+    private void Glow() {
+        renderer.material = glowMaterial;
+        eventHandler.notifyMainBoxGlowing(this);
     }
 
-    public void DisableHit() {
-        isGlowing = false;
-        if (renderer.sharedMaterial == glowMaterial) {
-            renderer.material = spriteMaterial;
-            cameraController.CancelChangeColor();
-        }
+    private void Dull() {
+        renderer.material = spriteMaterial;
+        eventHandler.notifyMainBoxDulling(this);
     }
 
 }

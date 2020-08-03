@@ -1496,6 +1496,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserWhite
       objectReference: {fileID: 0}
+    - target: {fileID: 7302452808054371353, guid: dc52135453fe1405d952fd87e3d9833a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.ctime1
@@ -2076,12 +2081,12 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5543244
+      value: 7.36
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3475318
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}

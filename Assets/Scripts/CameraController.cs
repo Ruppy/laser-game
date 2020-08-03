@@ -18,8 +18,6 @@ public class CameraController : MonoBehaviour
     private MovementController movementScript;
     private GameObject scriptsObject;
 
-    private bool isCoroutineRunning = false;
-
     private void OnEnable() {
         EventHandler.onMainBoxGlowing += OnMainBoxGlowing;
         EventHandler.onMainBoxDulling += onMainBoxDulling;
@@ -32,7 +30,6 @@ public class CameraController : MonoBehaviour
     }
 
     public void OnMainBoxGlowing(BoxController boxController) {
-        Debug.Log("The main box is glowing!");
         changeToColor = boxController.GetComponent<SpriteRenderer>().color;
         StartCoroutine("LerpColor");
     }
@@ -62,7 +59,6 @@ public class CameraController : MonoBehaviour
     }
 
     IEnumerator LerpColor() { // http://answers.unity.com/answers/755415/view.html
-        isCoroutineRunning = true;
         float progress = 0;
         float smoothness = 0.02f;
         float duration = 5;
@@ -78,6 +74,5 @@ public class CameraController : MonoBehaviour
         camera.backgroundColor = changeToColor;
         changeFromColor = changeToColor;
         scriptsObject.SendMessage("IncreaseStep");
-        isCoroutineRunning = false;
     }
 }

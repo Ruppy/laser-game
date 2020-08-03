@@ -17,8 +17,17 @@ public class LaserController : MonoBehaviour
     private EventHandler eventHandler = EventHandler.get();
     BoxController currentBox = null;
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnDisable() {
+        //Debug.Log("Im being disable " + hitIdentifier);
+    }
+
+    public void OnEnable() {
+        //Debug.Log("Im being enable " + hitIdentifier);
+    }
+
+
+        // Start is called before the first frame update
+        void Start()
     {
         line = GetComponent<LineRenderer>();
         if (transform.parent == null) {

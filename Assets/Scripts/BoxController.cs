@@ -8,7 +8,7 @@ public class BoxController : MonoBehaviour
     public string hitIdentifier = "";
 
     private bool isBeingHit = false;
-    private float timeSinceLastHit = 0f;
+    private bool isGlowing = false;
 
     public Material glowMaterial;
     private Material spriteMaterial;
@@ -17,19 +17,18 @@ public class BoxController : MonoBehaviour
 
     private EventHandler eventHandler = EventHandler.get();
 
-    private void OnEnable() {
+    public void OnEnable() {
         EventHandler.onLaserHit += boxBeingHit;
         EventHandler.onLaserStoppedHittingBox += boxStoppedBeingHit;
     }
 
-    private void OnDisable() {
+    public void OnDisable() {
         EventHandler.onLaserHit -= boxBeingHit;
         EventHandler.onLaserStoppedHittingBox -= boxStoppedBeingHit;
     }
 
     public void boxBeingHit(LaserController laserController, BoxController boxController) {
         isBeingHit = true;
-        timeSinceLastHit = Time.deltaTime;
     }
 
     public void boxStoppedBeingHit(LaserController laserController, BoxController boxController) {
@@ -52,13 +51,17 @@ public class BoxController : MonoBehaviour
     }
 
     private void Glow() {
+        if (isGlowing) return;
         renderer.material = glowMaterial;
         eventHandler.notifyMainBoxGlowing(this);
+        isGlowing = true;
     }
 
     private void Dull() {
+        if (!isGlowing) return;
         renderer.material = spriteMaterial;
         eventHandler.notifyMainBoxDulling(this);
+        isGlowing = false;
     }
 
 }

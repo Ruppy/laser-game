@@ -21,7 +21,7 @@ public class ColorDestroy : MonoBehaviour
         float blueDiff = Mathf.Abs(camera.backgroundColor.b - renderer.color.b);
         float colorDiff = redDiff + greenDiff + blueDiff;
 
-        bool shouldDestroy = colorDiff < 0.2;
+        bool shouldDestroy = colorDiff < 0.5;
         if(shouldDestroy) {
             gameObject.SetActive(false);
         }

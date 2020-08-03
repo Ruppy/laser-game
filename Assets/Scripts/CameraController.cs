@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 
 public class CameraController : MonoBehaviour
 {
@@ -10,14 +12,13 @@ public class CameraController : MonoBehaviour
     private Color changeFromColor;
     private Color changeToColor;
     private Camera camera;
-    private float timePassed = 0f;
     private bool enabled = false;
     private bool isCanceling = false;
     private bool shouldWarnStepChange = true;
     private MovementController movementScript;
     private GameObject scriptsObject;
 
-    private float timeSinceLastGlowingBoxEvent = 0f;
+    private bool isCoroutineRunning = false;
 
     private void OnEnable() {
         EventHandler.onMainBoxGlowing += OnMainBoxGlowing;
@@ -31,61 +32,52 @@ public class CameraController : MonoBehaviour
     }
 
     public void OnMainBoxGlowing(BoxController boxController) {
-        timeSinceLastGlowingBoxEvent = 0f;
-        enabled = true;
-        ChangeColor(boxController.GetComponent<SpriteRenderer>().color);
+        Debug.Log("The main box is glowing!");
+        changeToColor = boxController.GetComponent<SpriteRenderer>().color;
+        StartCoroutine("LerpColor");
     }
 
     public void onMainBoxDulling(BoxController boxController) {
-        enabled = false;
     }
 
     void Start() {
         camera = GetComponent<Camera>();
         changeFromColor = camera.backgroundColor;
-        changeToColor = camera.backgroundColor;
+        changeToColor = Color.yellow;
         enabled = false;
         scriptsObject = GameObject.Find("Scripts");
         movementScript = scriptsObject.GetComponent<MovementController>();
     }
 
     void Update() {
-        if (enabled == false) { return; }
-        if (movementScript.isMoving()) { return; }
-
-        if (isCanceling) {
-            //timePassed -= Time.deltaTime;
-        }
-        else {
-            timePassed += Time.deltaTime;
-        }
-
-        camera.backgroundColor = Color.Lerp(changeFromColor, changeToColor, timePassed/changeColorDuration);
-
-        if (shouldWarnStepChange) {
-            scriptsObject.SendMessage("IncreaseStep");
-            shouldWarnStepChange = false;
-        }
-
-        if (timePassed > changeColorDuration || timePassed < 0) {
-            enabled = false;
-            isCanceling = false;
-            shouldWarnStepChange = true;
-        }
+        
     }
 
-    public void ChangeColor(Color color) {
-        timePassed = 0;
-        changeToColor = color;
-        changeFromColor = camera.backgroundColor;
-        enabled = true;
-        isCanceling = false;
+
+    private bool areColorsTooEqual() {
+        float redDifference = Math.Abs(changeToColor.r - changeFromColor.r);
+        float greenDifference = Math.Abs(changeToColor.g - changeFromColor.g);
+        float blueDifference = Math.Abs(changeToColor.b - changeFromColor.b);
+        return (redDifference + greenDifference + blueDifference) < 0.2f;
     }
 
-    public void HitColor(Color color) {
-    }
-
-    public void CancelChangeColor() {
-        isCanceling = true;
+    IEnumerator LerpColor() { // http://answers.unity.com/answers/755415/view.html
+        isCoroutineRunning = true;
+        float progress = 0;
+        float smoothness = 0.02f;
+        float duration = 5;
+        float increment = smoothness / duration; 
+        while (progress < 1) {
+            if (areColorsTooEqual()) break;
+            progress += increment;
+            Color newColor = Color.Lerp(changeFromColor, changeToColor, progress);
+            camera.backgroundColor = newColor;
+            changeFromColor = newColor;
+            yield return new WaitForSeconds(smoothness);
+        }
+        camera.backgroundColor = changeToColor;
+        changeFromColor = changeToColor;
+        scriptsObject.SendMessage("IncreaseStep");
+        isCoroutineRunning = false;
     }
 }

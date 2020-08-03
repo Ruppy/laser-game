@@ -29,18 +29,22 @@ public class EventHandler
     }
 
    public void notifyLaserHitBox(LaserController laserController, BoxController boxController) {
+        //Debug.Log("notifying laser hitting box!");
         onLaserHit(laserController, boxController);
     }
 
     public void notifyLaserStoppedHittingBox(LaserController laserController, BoxController boxController) {
+        //Debug.Log("notifying laser stopped hitting box!");
         onLaserStoppedHittingBox(laserController, boxController);
     }
 
     public void notifyMainBoxGlowing(BoxController boxController) {
+        //Debug.Log("notifying box glowing!");
         onMainBoxGlowing(boxController);
     }
 
     public void notifyMainBoxDulling(BoxController boxController) {
+        //Debug.Log("notifying box dulling!");
         onMainBoxDulling(boxController);
     }
 

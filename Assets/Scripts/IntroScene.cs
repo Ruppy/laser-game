@@ -34,10 +34,10 @@ public class IntroScene : MonoBehaviour
 
     void Update() {
       if (changedToStep(1)) {
-        blackText.text = "about how life can fell bright";
+        blackText.text = "about how life can feel bright";
         mirrorBlack.SetActive(true);
         boxBlack.SetActive(true);
-      }
+        }
       else if (changedToStep(2)) {
         whiteText.text = "and yet, sometimes, very dark\n and challenging to see it bright again";
         mirrorWhite.SetActive(true);

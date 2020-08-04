@@ -17,24 +17,42 @@ public class CameraController : MonoBehaviour
     private bool shouldWarnStepChange = true;
     private MovementController movementScript;
     private GameObject scriptsObject;
+    private bool isPlayerMoving = false;
+    private bool isMainBoxGlowing = false;
 
     private void OnEnable() {
         EventHandler.onMainBoxGlowing += OnMainBoxGlowing;
         EventHandler.onMainBoxDulling += onMainBoxDulling;
+        EventHandler.onIsPlayerIdle += OnIsPlayerIdle;
+        EventHandler.onIsPlayerMoving += OnIsPlayerMoving;
     }
 
 
     private void OnDisable() {
         EventHandler.onMainBoxGlowing -= OnMainBoxGlowing;
         EventHandler.onMainBoxDulling -= onMainBoxDulling;
+        EventHandler.onIsPlayerIdle -= OnIsPlayerIdle;
+        EventHandler.onIsPlayerMoving -= OnIsPlayerMoving;
+    }
+
+    public void OnIsPlayerIdle() {
+        isPlayerMoving = false;
+        if(isMainBoxGlowing) {
+            StartCoroutine("LerpColor");
+        }
+    }
+
+    public void OnIsPlayerMoving() {
+        isPlayerMoving = true;
     }
 
     public void OnMainBoxGlowing(BoxController boxController) {
         changeToColor = boxController.GetComponent<SpriteRenderer>().color;
-        StartCoroutine("LerpColor");
+        isMainBoxGlowing = true;
     }
 
     public void onMainBoxDulling(BoxController boxController) {
+        isMainBoxGlowing = false;
     }
 
     void Start() {

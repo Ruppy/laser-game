@@ -10,6 +10,9 @@ public class MovementController : MonoBehaviour
 
     private bool rotateEnabled = true;
     private float rotatedSecondsAgo = 0f;
+
+    private bool wasNotifiedIdle = false;
+    private bool wasNotifiedMoving = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,10 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.notifyPlayerMoving();
+
         if (mirror == null) { return; }
+
         float rotationDelta = 0;
 
         if (Input.GetMouseButton(1))
@@ -53,6 +59,18 @@ public class MovementController : MonoBehaviour
 
 
 
+    }
+
+    private void notifyPlayerMoving() {
+        if(isMoving() && !wasNotifiedMoving) {
+            EventHandler.get().notifyPlayerMoving();
+            wasNotifiedMoving = true;
+            wasNotifiedIdle = false;
+        } else if (!isMoving() && !wasNotifiedIdle) {
+            EventHandler.get().notifyPlayerIdle();
+            wasNotifiedIdle = true;
+            wasNotifiedMoving = false;
+        }
     }
 
     public void setMirror(GameObject selectedMirror) {

@@ -19,6 +19,12 @@ public class EventHandler
     public delegate void MainBoxDullingEvent(BoxController boxController);
     public static event MainBoxDullingEvent onMainBoxDulling;
 
+    public delegate void PlayerIsMovingEvent();
+    public static event PlayerIsMovingEvent onIsPlayerMoving;
+
+    public delegate void PlayerIsIdleEvent();
+    public static event PlayerIsIdleEvent onIsPlayerIdle;
+
     private static EventHandler instance = null;
 
     public static EventHandler get() {
@@ -26,6 +32,18 @@ public class EventHandler
             instance = new EventHandler();
         }
         return instance;
+    }
+
+    public void notifyPlayerMoving() {
+        Debug.Log("player is moving!");
+        if (onIsPlayerMoving == null) return;
+        onIsPlayerMoving();
+    }
+
+    public void notifyPlayerIdle() {
+        Debug.Log("player is idle!");
+        if (onIsPlayerIdle == null) return;
+        onIsPlayerIdle();
     }
 
    public void notifyLaserHitBox(LaserController laserController, BoxController boxController) {

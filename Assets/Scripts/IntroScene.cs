@@ -62,8 +62,10 @@ public class IntroScene : MonoBehaviour {
 
     private bool changedToStep(int step) {
         bool changed = (previousStep == step - 1) && (currentStep == step);
-        if (changed)
+        if (changed) {
             previousStep = step;
+            Cursor.visible = true;
+        }
         return changed;
     }
 

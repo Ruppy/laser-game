@@ -1623,14 +1623,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468240826}
     m_Modifications:
-    - target: {fileID: 576454219, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
-      propertyPath: timeToIgnoreDrag
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 576454219, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
-      propertyPath: rotationSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085116, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_Name

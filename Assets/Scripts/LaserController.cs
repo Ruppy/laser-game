@@ -93,8 +93,8 @@ public class LaserController : MonoBehaviour
           }
           else {
                 if (currentBox != null) { //beautify this
-                    currentBox = null;
                     eventHandler.notifyLaserStoppedHittingBox(this, currentBox);
+                    currentBox = null;
                 }
                 break;
           }

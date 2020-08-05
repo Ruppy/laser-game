@@ -48,10 +48,12 @@ public class CameraController : MonoBehaviour
 
     public void OnMainBoxGlowing(BoxController boxController) {
         changeToColor = boxController.GetComponent<SpriteRenderer>().color;
+        Debug.Log("Main box glowing in " + changeToColor);
         isMainBoxGlowing = true;
     }
 
     public void onMainBoxDulling(BoxController boxController) {
+        Debug.Log("Main box dulling in " + changeToColor);
         isMainBoxGlowing = false;
     }
 

@@ -28,11 +28,15 @@ public class BoxController : MonoBehaviour
     }
 
     public void boxBeingHit(LaserController laserController, BoxController boxController) {
-        isBeingHit = true;
+        if(laserController.hitIdentifier.Equals(this.hitIdentifier)) {
+            isBeingHit = true;
+        }
     }
 
     public void boxStoppedBeingHit(LaserController laserController, BoxController boxController) {
-        isBeingHit = false;
+        if (laserController.hitIdentifier.Equals(this.hitIdentifier)) {
+            isBeingHit = false;
+        }
     }
 
     void Start()

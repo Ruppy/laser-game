@@ -35,13 +35,13 @@ public class EventHandler
     }
 
     public void notifyPlayerMoving() {
-        Debug.Log("player is moving!");
+        //Debug.Log("player is moving!");
         if (onIsPlayerMoving == null) return;
         onIsPlayerMoving();
     }
 
     public void notifyPlayerIdle() {
-        Debug.Log("player is idle!");
+        //Debug.Log("player is idle!");
         if (onIsPlayerIdle == null) return;
         onIsPlayerIdle();
     }
@@ -57,7 +57,6 @@ public class EventHandler
     }
 
     public void notifyMainBoxGlowing(BoxController boxController) {
-        //Debug.Log("notifying box glowing!");
         onMainBoxGlowing(boxController);
     }
 

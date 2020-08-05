@@ -30,7 +30,7 @@ public class IntroScene : MonoBehaviour {
 
         scenes.Add(0, new List<GameObject>() { laserWhite, boxWhite, mirrorWhite });
         scenes.Add(1, new List<GameObject>() { mirrorBlack, boxBlack, laserBlack });
-        scenes.Add(2, new List<GameObject>() { mirrorWhite, boxWhite, wall01, wall02, mirrorWhite02 });
+        scenes.Add(2, new List<GameObject>() { laserWhite, mirrorWhite, boxWhite, wall01, wall02, mirrorWhite02 });
         scenes.Add(3, new List<GameObject>() { mirrorBlack, boxBlack, laserBlack });
         scenes.Add(4, new List<GameObject>() { laserWhite });
         scenes.Add(5, new List<GameObject>() { laserWhite });

@@ -18,8 +18,6 @@ public class IntroScene : MonoBehaviour {
     public GameObject wall02;
 
     List<GameObject> allObjects = new List<GameObject>();
-
-
     Dictionary<int, List<GameObject>> scenes = new Dictionary<int, List<GameObject>>();
 
     public int currentStep = 0;
@@ -27,7 +25,6 @@ public class IntroScene : MonoBehaviour {
     private Animator animator;
 
     void Start() {
-
         scenes.Add(0, new List<GameObject>() { laserWhite, boxWhite, mirrorWhite });
         scenes.Add(1, new List<GameObject>() { mirrorBlack, boxBlack, laserBlack });
         scenes.Add(2, new List<GameObject>() { laserWhite, mirrorWhite, boxWhite, wall01, wall02, mirrorWhite02 });

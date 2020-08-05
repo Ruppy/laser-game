@@ -67,7 +67,7 @@ public class CameraController : MonoBehaviour
     }
 
     void Update() {
-        
+
     }
 
 
@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
         float progress = 0;
         float smoothness = 0.02f;
         float duration = 5;
-        float increment = smoothness / duration; 
+        float increment = smoothness / duration;
         scriptsObject.SendMessage("WillIncreaseStep");
         while (progress < 1) {
             if (areColorsTooEqual()) break;

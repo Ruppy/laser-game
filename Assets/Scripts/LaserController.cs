@@ -26,8 +26,8 @@ public class LaserController : MonoBehaviour
     }
 
 
-        // Start is called before the first frame update
-        void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         line = GetComponent<LineRenderer>();
         if (transform.parent == null) {

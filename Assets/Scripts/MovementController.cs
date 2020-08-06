@@ -6,9 +6,13 @@ public class MovementController : MonoBehaviour
 {
     public GameObject mirror;
     public float speed = 10f;
+    public bool movementLock = false;
 
     private bool rotateEnabled = true;
     private float rotatedSecondsAgo = 0f;
+
+    private bool wasNotifiedIdle = false;
+    private bool wasNotifiedMoving = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,18 +22,29 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.notifyPlayerMoving();
+
         if (mirror == null) { return; }
 
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
-        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-        mirror.transform.position = curPosition;
+        float rotationDelta = 0;
+
+        if (Input.GetMouseButton(1))
+        {
+            rotationDelta = 15f;
+        }
+
+
+        if (movementLock == false) {
+            Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+            Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+            mirror.transform.position = curPosition;
+        }
 
         if (rotateEnabled == false) {
             rotatedSecondsAgo += Time.deltaTime;
             rotateEnabled = rotatedSecondsAgo > 0.05;
         }
         else {
-            float rotationDelta = 0;
             if (Input.GetKey("z")) {
               rotationDelta = 3f;
             }
@@ -44,6 +59,18 @@ public class MovementController : MonoBehaviour
 
 
 
+    }
+
+    private void notifyPlayerMoving() {
+        if(isMoving() && !wasNotifiedMoving) {
+            EventHandler.get().notifyPlayerMoving();
+            wasNotifiedMoving = true;
+            wasNotifiedIdle = false;
+        } else if (!isMoving() && !wasNotifiedIdle) {
+            EventHandler.get().notifyPlayerIdle();
+            wasNotifiedIdle = true;
+            wasNotifiedMoving = false;
+        }
     }
 
     public void setMirror(GameObject selectedMirror) {

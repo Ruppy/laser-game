@@ -14,15 +14,27 @@ public class LaserController : MonoBehaviour
     public string hitIdentifier = "";
     private MirrorController lastMirror;
 
+    private EventHandler eventHandler = EventHandler.get();
+    BoxController currentBox = null;
+
+    public void OnDisable() {
+        //Debug.Log("Im being disable " + hitIdentifier);
+    }
+
+    public void OnEnable() {
+        //Debug.Log("Im being enable " + hitIdentifier);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
         line = GetComponent<LineRenderer>();
         if (transform.parent == null) {
-          line.enabled = true;
+          //line.enabled = true;
         }
         else {
-          line.enabled = false;
+          //line.enabled = false;
         }
     }
 
@@ -69,13 +81,22 @@ public class LaserController : MonoBehaviour
               lastCollideObject = mirrorGameObject;
           }
           else if (hitObject.CompareTag("Box")) {
-            GameObject boxGameObject = hitObject;
-            BoxController boxController = boxGameObject.GetComponent<BoxController>();
-            boxController.Hit(hitIdentifier);
-            break;
+                BoxController boxController = hitObject.GetComponent<BoxController>();
+                if(currentBox == null) {
+                    currentBox = boxController;
+                } else if (currentBox != boxController) {
+                    eventHandler.notifyLaserStoppedHittingBox(this, currentBox);
+                    currentBox = boxController;
+                }
+                eventHandler.notifyLaserHitBox(this, currentBox);
+                break;
           }
           else {
-            break;
+                if (currentBox != null) { //beautify this
+                    eventHandler.notifyLaserStoppedHittingBox(this, currentBox);
+                    currentBox = null;
+                }
+                break;
           }
         }
     }

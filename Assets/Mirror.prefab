@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToIgnoreDrag: 0.1
   rotationSpeed: 0.1
+  scrollRotationSpeed: 5
 --- !u!114 &1703755192293734988
 MonoBehaviour:
   m_ObjectHideFlags: 0

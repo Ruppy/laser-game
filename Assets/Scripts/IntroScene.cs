@@ -58,7 +58,6 @@ public class IntroScene : MonoBehaviour {
         disableScene(currentStep-1);
 
         if (currentStep == 4) {
-            //animator.SetTrigger("animateEnd");
             laserWhite.GetComponent<LaserController>().FadeOut();
         }
     }

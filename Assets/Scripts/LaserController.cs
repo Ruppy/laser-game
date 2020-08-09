@@ -22,7 +22,7 @@ public class LaserController : MonoBehaviour
     }
 
     public void OnEnable() {
-        Debug.Log("Im being enable " + hitIdentifier + " " + GetComponent<LineRenderer>().startWidth);
+        //Debug.Log("Im being enable " + hitIdentifier);
     }
 
 

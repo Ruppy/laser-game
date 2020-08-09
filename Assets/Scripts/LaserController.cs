@@ -22,7 +22,7 @@ public class LaserController : MonoBehaviour
     }
 
     public void OnEnable() {
-        //Debug.Log("Im being enable " + hitIdentifier);
+        Debug.Log("Im being enable " + hitIdentifier + " " + GetComponent<LineRenderer>().startWidth);
     }
 
 
@@ -36,6 +36,22 @@ public class LaserController : MonoBehaviour
         else {
           //line.enabled = false;
         }
+    }
+
+    public void FadeOut() {
+        StartCoroutine("FadeWidthOut");
+    }
+
+    IEnumerator FadeWidthOut() { 
+        float smoothness = 0.1f;
+        float width = GetComponent<LineRenderer>().startWidth;
+        while (width > 0.005f) {
+            GetComponent<LineRenderer>().startWidth = width * 0.95f;
+            width = GetComponent<LineRenderer>().startWidth;
+            Debug.Log("tamo diminuindo");
+            yield return new WaitForSeconds(smoothness);
+        }
+        GetComponent<LineRenderer>().startWidth = 0;
     }
 
     // Update is called once per frame

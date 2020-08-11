@@ -59,6 +59,7 @@ public class IntroScene : MonoBehaviour {
 
         if (currentStep == 4) {
             laserWhite.GetComponent<LaserController>().FadeOut();
+            StartCoroutine("FadeTextOut");
         }
     }
 
@@ -77,6 +78,20 @@ public class IntroScene : MonoBehaviour {
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
         } else if (nextStep == 4) {
             whiteText.text = "and almost impossible to get out of it";
+        }
+    }
+
+    IEnumerator FadeTextOut() {
+        Color colorToFade = Color.black;
+        float progress = 0;
+        float smoothness = 0.2f;
+        float duration = 10;
+        float increment = smoothness / duration;
+        while (progress < 1) {
+            progress += increment;
+            Color newColor = Color.Lerp(whiteText.color, colorToFade, progress);
+            whiteText.color = newColor;
+            yield return new WaitForSeconds(smoothness);
         }
     }
 

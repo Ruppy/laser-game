@@ -25,7 +25,6 @@ public class LaserController : MonoBehaviour
         //Debug.Log("Im being enable " + hitIdentifier);
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +35,21 @@ public class LaserController : MonoBehaviour
         else {
           //line.enabled = false;
         }
+    }
+
+    public void FadeOut() {
+        StartCoroutine("FadeWidthOut");
+    }
+
+    IEnumerator FadeWidthOut() {
+        float smoothness = 0.1f;
+        float width = GetComponent<LineRenderer>().startWidth;
+        while (width > 0.005f) {
+            GetComponent<LineRenderer>().startWidth = width * 0.97f;
+            width = GetComponent<LineRenderer>().startWidth;
+            yield return new WaitForSeconds(smoothness);
+        }
+        GetComponent<LineRenderer>().startWidth = 0;
     }
 
     // Update is called once per frame

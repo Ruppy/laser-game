@@ -14,6 +14,8 @@ public class IntroScene : MonoBehaviour {
     public GameObject boxBlack;
     public Text whiteText;
     public Text blackText;
+    public Text essayText;
+    public Text ruppyText;
     public GameObject wall01;
     public GameObject wall02;
 
@@ -58,8 +60,18 @@ public class IntroScene : MonoBehaviour {
         disableScene(currentStep-1);
 
         if (currentStep == 4) {
-            animator.SetTrigger("animateEnd");
+            laserWhite.GetComponent<LaserController>().FadeOut();
+            textAnimations();
         }
+    }
+
+    public void textAnimations() {
+        Color whiteColor = Color.white;
+        Color blackColor = Color.black;
+        IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 5, null);
+        IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 5, fadeInRuppyText);
+        IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 5, 10, fadeInEssayText);
+        StartCoroutine(fadeOutWhiteText);
     }
 
     public void WillIncreaseStep() {
@@ -77,6 +89,24 @@ public class IntroScene : MonoBehaviour {
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
         } else if (nextStep == 4) {
             whiteText.text = "and almost impossible to get out of it";
+        }
+    }
+
+    IEnumerator AnimateText(Text text, Color startColor, Color endColor, float delay, float duration, IEnumerator onEnd) {
+        yield return new WaitForSeconds(delay);
+        text.gameObject.SetActive(true);
+        float progress = 0;
+        float smoothness = 0.1f;
+        float increment = smoothness / duration;
+        while (progress < 1) {
+            progress += increment;
+            Color newColor = Color.Lerp(startColor, endColor, progress);
+            text.color = newColor;
+            yield return new WaitForSeconds(smoothness);
+        }
+
+        if (onEnd != null) {
+            StartCoroutine(onEnd);
         }
     }
 

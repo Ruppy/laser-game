@@ -554,6 +554,8 @@ MonoBehaviour:
   boxBlack: {fileID: 1459506382}
   whiteText: {fileID: 201317942}
   blackText: {fileID: 1897195037}
+  essayText: {fileID: 13675333}
+  ruppyText: {fileID: 301110120}
   wall01: {fileID: 1051206173}
   wall02: {fileID: 486378471}
   currentStep: 0
@@ -621,7 +623,7 @@ Animator:
   m_GameObject: {fileID: 468240825}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8a93cdd498f67431e8ee843f6c0e15a1, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1504,6 +1506,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
+        type: 3}
       propertyPath: m_Parameters.colorGradient.ctime1
       value: 65535
       objectReference: {fileID: 0}
@@ -1541,6 +1548,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.colorGradient.ctime0
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
+        type: 3}
+      propertyPath: m_Positions.Array.data[2].x
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371355, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}

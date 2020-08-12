@@ -554,6 +554,8 @@ MonoBehaviour:
   boxBlack: {fileID: 1459506382}
   whiteText: {fileID: 201317942}
   blackText: {fileID: 1897195037}
+  essayText: {fileID: 13675333}
+  ruppyText: {fileID: 301110120}
   wall01: {fileID: 1051206173}
   wall02: {fileID: 486378471}
   currentStep: 0

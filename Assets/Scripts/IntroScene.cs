@@ -14,6 +14,8 @@ public class IntroScene : MonoBehaviour {
     public GameObject boxBlack;
     public Text whiteText;
     public Text blackText;
+    public Text essayText;
+    public Text ruppyText;
     public GameObject wall01;
     public GameObject wall02;
 
@@ -59,8 +61,17 @@ public class IntroScene : MonoBehaviour {
 
         if (currentStep == 4) {
             laserWhite.GetComponent<LaserController>().FadeOut();
-            StartCoroutine("FadeTextOut");
+            textAnimations();
         }
+    }
+
+    public void textAnimations() {
+        Color whiteColor = Color.white;
+        Color blackColor = Color.black;
+        IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 5, null);
+        IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 5, fadeInRuppyText);
+        IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 5, 10, fadeInEssayText);
+        StartCoroutine(fadeOutWhiteText);
     }
 
     public void WillIncreaseStep() {
@@ -81,17 +92,21 @@ public class IntroScene : MonoBehaviour {
         }
     }
 
-    IEnumerator FadeTextOut() {
-        Color colorToFade = Color.black;
+    IEnumerator AnimateText(Text text, Color startColor, Color endColor, float delay, float duration, IEnumerator onEnd) {
+        yield return new WaitForSeconds(delay);
+        text.gameObject.SetActive(true);
         float progress = 0;
-        float smoothness = 0.2f;
-        float duration = 10;
+        float smoothness = 0.1f;
         float increment = smoothness / duration;
         while (progress < 1) {
             progress += increment;
-            Color newColor = Color.Lerp(whiteText.color, colorToFade, progress);
-            whiteText.color = newColor;
+            Color newColor = Color.Lerp(startColor, endColor, progress);
+            text.color = newColor;
             yield return new WaitForSeconds(smoothness);
+        }
+
+        if (onEnd != null) {
+            StartCoroutine(onEnd);
         }
     }
 

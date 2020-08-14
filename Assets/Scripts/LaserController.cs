@@ -67,7 +67,7 @@ public class LaserController : MonoBehaviour
         while (hit) {
 
           line.positionCount += 3;
-          if (line.positionCount > 20) { break; }
+          if (line.positionCount > 30) { break; }
 
           Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0);
           line.SetPosition(line.positionCount - 3, transform.InverseTransformPoint(hitPosition));

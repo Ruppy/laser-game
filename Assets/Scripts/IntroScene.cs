@@ -93,11 +93,28 @@ public class IntroScene : MonoBehaviour {
             whiteText.text = "and yet, sometimes, very dark\n and challenging to see it bright again";
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
         } else if (nextStep == 3) {
+            StartCoroutine(FadeWall(wall02, 0.6f));
             blackText.text = "well, it's normal to feel both ways from time to time\nthe problem starts when it's way easier to go back to darkness...";
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
         } else if (nextStep == 4) {
             whiteText.text = "and almost impossible to get out of it";
+        }
+    }
+
+    IEnumerator FadeWall(GameObject wall, float duration) {
+        float progress = 0;
+        float smoothness = 0.1f;
+        float increment = smoothness / duration;
+        SpriteRenderer renderer = wall.GetComponent<SpriteRenderer>();
+        Color startColor = renderer.color;
+        Color endColor = startColor;
+        endColor.a = 0;
+        while (progress < 1) {
+            progress += increment;
+            Color newColor = Color.Lerp(startColor, endColor, progress);
+            renderer.color = newColor;
+            yield return new WaitForSeconds(smoothness);
         }
     }
 

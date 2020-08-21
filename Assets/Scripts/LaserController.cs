@@ -46,7 +46,7 @@ public class LaserController : MonoBehaviour
         float smoothness = 0.1f;
         float width = GetComponent<LineRenderer>().startWidth;
         while (width > 0.005f) {
-            GetComponent<LineRenderer>().startWidth = width * 0.97f;
+            GetComponent<LineRenderer>().startWidth = width * 0.955f;
             width = GetComponent<LineRenderer>().startWidth;
             yield return new WaitForSeconds(smoothness);
         }

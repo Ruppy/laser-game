@@ -77,9 +77,9 @@ public class IntroScene : MonoBehaviour {
     public void textAnimations() {
         Color whiteColor = Color.white;
         Color blackColor = new Color(1f, 1f, 1f, 0f);
-        IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 5, null);
-        IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 5, fadeInRuppyText);
-        IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 5, 10, fadeInEssayText);
+        IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 3.7f, null);
+        IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 3.7f, fadeInRuppyText);
+        IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 2, 8, fadeInEssayText);
         StartCoroutine(fadeOutWhiteText);
     }
 

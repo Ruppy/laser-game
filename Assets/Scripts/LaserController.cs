@@ -13,6 +13,10 @@ public class LaserController : MonoBehaviour
     public float laserOffset = 0.05f;
     public string hitIdentifier = "";
     private MirrorController lastMirror;
+    private EdgeCollider2D edgeCollider;
+
+    private int totalOfLaserPoints;
+    private Vector3[] laserPoints;
 
     private EventHandler eventHandler = EventHandler.get();
     BoxController currentBox = null;
@@ -28,13 +32,10 @@ public class LaserController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        laserPoints = new Vector3[30];
+        totalOfLaserPoints = 0;
         line = GetComponent<LineRenderer>();
-        if (transform.parent == null) {
-          //line.enabled = true;
-        }
-        else {
-          //line.enabled = false;
-        }
+        edgeCollider = GetComponent<EdgeCollider2D>();
     }
 
     public void FadeOut() {
@@ -55,24 +56,53 @@ public class LaserController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        calculatePoints();
+        renderLaserPoints();
+        renderLaserCollider();
+    }
+
+    void renderLaserPoints() {
+        line.positionCount = (totalOfLaserPoints * 3) - 2;
+        for (int index = 1; index < totalOfLaserPoints; index++) {
+            Vector3 point = laserPoints[index];
+            int baseIndex = ((index-1) * 3) + 1;
+            line.SetPosition(baseIndex, point);
+            line.SetPosition(baseIndex + 1, point);
+            line.SetPosition(baseIndex + 2, point);
+        }
+    }
+
+    void renderLaserCollider() {
+        if (edgeCollider == null) { return; }
+
+        Vector2[] colliderPoints = new Vector2[totalOfLaserPoints];
+        for (int index = 0; index < totalOfLaserPoints; index++) {
+            Vector3 point = laserPoints[index];
+            colliderPoints[index] = new Vector2(point.x, point.y + 0.15f);
+        }
+        edgeCollider.points = colliderPoints;
+    }
+
+    void calculatePoints() {
         initialRaycastPosition = transform.position + new Vector3(0.01f, 0, 0);
 
         Debug.DrawRay(initialRaycastPosition, transform.right * lineLength, Color.red);
         hit = Physics2D.Raycast(initialRaycastPosition, transform.right, lineLength, layerMask);
         line.positionCount = 1;
-
         GameObject lastCollideObject = gameObject;
         Vector3 reflectionAngle = transform.right;
+
+        int pointIndex = 0;
+        laserPoints[pointIndex] = new Vector3(0f, 0f, 0f);
 
         while (hit) {
 
           line.positionCount += 3;
-          if (line.positionCount > 20) { break; }
+          if (line.positionCount > 30) { break; }
 
           Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, 0);
-          line.SetPosition(line.positionCount - 3, transform.InverseTransformPoint(hitPosition));
-          line.SetPosition(line.positionCount - 2, transform.InverseTransformPoint(hitPosition));
-          line.SetPosition(line.positionCount - 1, transform.InverseTransformPoint(hitPosition));
+          pointIndex += 1;
+          laserPoints[pointIndex] = transform.InverseTransformPoint(hitPosition);
 
           GameObject hitObject = hit.collider.gameObject;
           if (hitObject.CompareTag("Mirror")) {
@@ -113,5 +143,7 @@ public class LaserController : MonoBehaviour
                 break;
           }
         }
+
+        totalOfLaserPoints = pointIndex + 1;
     }
 }

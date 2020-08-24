@@ -400,7 +400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: let's tell a story
+  m_Text: 
 --- !u!222 &201317943
 CanvasRenderer:
   m_ObjectHideFlags: 0

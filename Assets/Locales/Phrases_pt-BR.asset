@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Phrases_pt-BR
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: pt-BR
+  m_SharedData: {fileID: 11400000, guid: 803551642814c8e449caf7525090ff48, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 17758904320
+    m_Localized: sobre como a vida pode ser brilhante
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102882304000
+    m_Localized: "mas tamb\xE9m, as vezes, bem escura\ne dificil de ver brilhante
+      novamente"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306423488512
+    m_Localized: "bem, \xE9 normal sentir - se dos dois jeitos de vez em quando \no
+      problema surge quando fica mais f\xE1cil ir para a escurid\xE3o..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 607301885952
+    m_Localized: e quase impossivel de voltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17945971613696
+    m_Localized: "vamos contar uma hist\xF3ria"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19655330848768
+    m_Localized: "esse \xE9 Lights\num ensaio sobre depress\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19784301502464
+    m_Localized: por Ruppy Studio
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

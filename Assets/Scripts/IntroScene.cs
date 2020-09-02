@@ -21,6 +21,11 @@ public class IntroScene : MonoBehaviour {
     public GameObject wall03;
     public GameObject wall04;
     public GameObject wall05;
+    public AudioSource audioSource;
+
+    public AudioClip bellsAudio;
+    public AudioClip bellsAudioMid;
+    public AudioClip bellsAudioLate;
 
     List<GameObject> allObjects = new List<GameObject>();
     Dictionary<int, List<GameObject>> scenes = new Dictionary<int, List<GameObject>>();
@@ -53,6 +58,8 @@ public class IntroScene : MonoBehaviour {
         foreach (GameObject gameObject in allObjects) {
             gameObject.SetActive(false);
         }
+
+        audioSource = GetComponent<AudioSource>();
 
         enableScene(0);
         animator = GameObject.Find("Puzzle").GetComponent<Animator>();
@@ -89,14 +96,17 @@ public class IntroScene : MonoBehaviour {
 
         if (nextStep == 1) {
             blackText.text = "about how life can feel bright";
+            audioSource.PlayOneShot(bellsAudio);
         } else if (nextStep == 2) {
             whiteText.text = "and yet, sometimes, very dark\n and challenging to see it bright again";
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
+            audioSource.PlayOneShot(bellsAudioMid);
         } else if (nextStep == 3) {
             StartCoroutine(FadeWall(wall02, 0.6f));
             blackText.text = "well, it's normal to feel both ways from time to time\nthe problem starts when it's way easier to go back to darkness...";
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
+            audioSource.PlayOneShot(bellsAudioLate);
         } else if (nextStep == 4) {
             whiteText.text = "and almost impossible to get out of it";
         }

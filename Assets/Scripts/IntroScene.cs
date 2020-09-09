@@ -21,6 +21,11 @@ public class IntroScene : MonoBehaviour {
     public GameObject wall03;
     public GameObject wall04;
     public GameObject wall05;
+    public AudioSource audioSource;
+
+    public AudioClip bellsAudio;
+    public AudioClip bellsAudioMid;
+    public AudioClip bellsAudioLate;
 
     List<GameObject> allObjects = new List<GameObject>();
     Dictionary<int, List<GameObject>> scenes = new Dictionary<int, List<GameObject>>();
@@ -54,6 +59,7 @@ public class IntroScene : MonoBehaviour {
             gameObject.SetActive(false);
         }
 
+        audioSource = GetComponent<AudioSource>();
         getLocalizedPhrase("S1_P0", whiteText);
         getLocalizedPhrase("INTRO", essayText);
         getLocalizedPhrase("BY_RUPPY", ruppyText);
@@ -90,15 +96,19 @@ public class IntroScene : MonoBehaviour {
         enableScene(nextStep);
 
         if (nextStep == 1) {
+            blackText.text = "about how life can feel bright";
+            audioSource.PlayOneShot(bellsAudio);
             getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
             getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
+            audioSource.PlayOneShot(bellsAudioMid);
         } else if (nextStep == 3) {
             StartCoroutine(FadeWall(wall02, 0.6f));
             getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
+            audioSource.PlayOneShot(bellsAudioLate);
         } else if (nextStep == 4) {
             getLocalizedPhrase("S1_P4", whiteText);
         }

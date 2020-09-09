@@ -54,11 +54,12 @@ public class IntroScene : MonoBehaviour {
             gameObject.SetActive(false);
         }
 
+        getLocalizedPhrase("S1_P0", whiteText);
+        getLocalizedPhrase("INTRO", essayText);
+        getLocalizedPhrase("BY_RUPPY", ruppyText);
+
         enableScene(0);
         animator = GameObject.Find("Puzzle").GetComponent<Animator>();
-        //GameObject.Find("Main Camera").GetComponent<Camera>().backgroundColor = Color.black;
-        //currentStep = 1;
-        //WillIncreaseStep();
     }
 
     void Update() {
@@ -80,6 +81,7 @@ public class IntroScene : MonoBehaviour {
         IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 3.7f, null);
         IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 3.7f, fadeInRuppyText);
         IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 2, 8, fadeInEssayText);
+        
         StartCoroutine(fadeOutWhiteText);
     }
 
@@ -88,18 +90,21 @@ public class IntroScene : MonoBehaviour {
         enableScene(nextStep);
 
         if (nextStep == 1) {
-            blackText.text = "about how life can feel bright";
+            getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
-            whiteText.text = "and yet, sometimes, very dark\n and challenging to see it bright again";
+            getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
         } else if (nextStep == 3) {
             StartCoroutine(FadeWall(wall02, 0.6f));
-            blackText.text = "well, it's normal to feel both ways from time to time\nthe problem starts when it's way easier to go back to darkness...";
+            getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
         } else if (nextStep == 4) {
-            whiteText.text = "and almost impossible to get out of it";
+            getLocalizedPhrase("S1_P4", whiteText);
         }
+
+        
+
     }
 
     IEnumerator FadeWall(GameObject wall, float duration) {
@@ -149,4 +154,14 @@ public class IntroScene : MonoBehaviour {
             gameObject.SetActive(true);
         }
     }
+
+    private void getLocalizedPhrase(string key, Text toChange) {
+        var op = UnityEngine.Localization.Settings.LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Phrases", key);
+        if (op.IsDone)
+            toChange.text = op.Result;
+        else
+            op.Completed += (o) => toChange.text = op.Result;
+
+    }
+
 }

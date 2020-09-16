@@ -23,13 +23,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 102882304000
-    m_Localized: "mas tamb\xE9m, as vezes, bem escura\ne dificil de ver brilhante
-      novamente"
+    m_Localized: 'mas, as vezes, bem escura
+
+      e dificil de brilhar novamente'
     m_Metadata:
       m_Items: []
   - m_Id: 306423488512
-    m_Localized: "bem, \xE9 normal sentir - se dos dois jeitos de vez em quando \no
-      problema surge quando fica mais f\xE1cil ir para a escurid\xE3o..."
+    m_Localized: "completamente normal sentir-se dos dois jeitos de vez em quando
+      \no problema surge quando fica mais simples ir para o escuro"
     m_Metadata:
       m_Items: []
   - m_Id: 607301885952
@@ -37,11 +38,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17945971613696
-    m_Localized: "vamos contar uma hist\xF3ria"
+    m_Localized: vamos contar uma historia
     m_Metadata:
       m_Items: []
   - m_Id: 19655330848768
-    m_Localized: "esse \xE9 Lights\num ensaio sobre depress\xE3o"
+    m_Localized: 'Lights
+
+      um ensaio sobre depressao'
     m_Metadata:
       m_Items: []
   - m_Id: 19784301502464

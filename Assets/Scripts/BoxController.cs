@@ -6,6 +6,7 @@ public class BoxController : MonoBehaviour
 {
     public float hitDelay = 0.15f;
     public string hitIdentifier = "";
+    public bool isSatisfied = false;
 
     private bool isBeingHit = false;
     private bool isGlowing = false;
@@ -14,6 +15,7 @@ public class BoxController : MonoBehaviour
     private Material spriteMaterial;
 
     private SpriteRenderer renderer;
+    private Coroutine increaseGlowCoroutine;
 
     private EventHandler eventHandler = EventHandler.get();
 
@@ -59,6 +61,10 @@ public class BoxController : MonoBehaviour
         renderer.material = glowMaterial;
         eventHandler.notifyMainBoxGlowing(this);
         isGlowing = true;
+        if (increaseGlowCoroutine == null) {
+            increaseGlowCoroutine = StartCoroutine(IncreaseGlow(1.2f));
+        }
+
     }
 
     private void Dull() {
@@ -66,6 +72,21 @@ public class BoxController : MonoBehaviour
         renderer.material = spriteMaterial;
         eventHandler.notifyMainBoxDulling(this);
         isGlowing = false;
+        StopCoroutine(increaseGlowCoroutine);
+        increaseGlowCoroutine = null;
+        isSatisfied = false;
+    }
+
+    //TODO: This routine does not increase glow yet.
+    IEnumerator IncreaseGlow(float duration) {
+        float progress = 0;
+        float smoothness = 0.1f;
+        float increment = smoothness / duration;
+        while (progress < 1) {
+            progress += increment;
+            yield return new WaitForSeconds(smoothness);
+        }
+        isSatisfied = true;
     }
 
 }

@@ -36,6 +36,8 @@ public class IntroScene : MonoBehaviour {
     public int previousStep = 0;
     private Animator animator;
 
+    private EventHandler eventHandler = EventHandler.get();
+
     void Start() {
 
         blackParticleSystem.GetComponent<ParticleSystem>().startColor = Color.black;
@@ -85,6 +87,8 @@ public class IntroScene : MonoBehaviour {
             laserWhite.GetComponent<LaserController>().FadeOut();
             textAnimations();
         }
+
+        eventHandler.notifyStepChange();
     }
 
     public void textAnimations() {
@@ -93,8 +97,10 @@ public class IntroScene : MonoBehaviour {
         IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 3.7f, null);
         IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 3.7f, fadeInRuppyText);
         IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 2, 8, fadeInEssayText);
+
         ParticleSystem.EmissionModule emission = whiteParticleSystem.GetComponent<ParticleSystem>().emission;
         emission.rateOverTime = 0;
+
         StartCoroutine(fadeOutWhiteText);
     }
 
@@ -106,7 +112,7 @@ public class IntroScene : MonoBehaviour {
             toogleParticleSystems();
             blackText.text = "about how life can feel bright";
             audioSource.PlayOneShot(bellsAudio);
-            getLocalizedPhrase("S1_P1", blackText);            
+            getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
             toogleParticleSystems();
             getLocalizedPhrase("S1_P2", whiteText);
@@ -123,9 +129,6 @@ public class IntroScene : MonoBehaviour {
             toogleParticleSystems();
             getLocalizedPhrase("S1_P4", whiteText);
         }
-
-        
-
     }
 
     private void toogleParticleSystems() {

@@ -25,6 +25,9 @@ public class EventHandler
     public delegate void PlayerIsIdleEvent();
     public static event PlayerIsIdleEvent onIsPlayerIdle;
 
+    public delegate void StepChangeEvent();
+    public static event StepChangeEvent onStepChange;
+
     private static EventHandler instance = null;
 
     public static EventHandler get() {
@@ -32,6 +35,11 @@ public class EventHandler
             instance = new EventHandler();
         }
         return instance;
+    }
+
+    public void notifyStepChange() {
+        if (onStepChange == null) return;
+        onStepChange();
     }
 
     public void notifyPlayerMoving() {

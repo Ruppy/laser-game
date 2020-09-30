@@ -112,7 +112,6 @@ public class IntroScene : MonoBehaviour {
             getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
             audioSource.PlayOneShot(bellsAudioMid);
-            changeParticlesToColor(Color.white);
         } else if (nextStep == 3) {
             toogleParticleSystems();
             StartCoroutine(FadeWall(wall02, 0.6f));
@@ -120,11 +119,9 @@ public class IntroScene : MonoBehaviour {
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
             audioSource.PlayOneShot(bellsAudioLate);
-            changeParticlesToColor(Color.black);
         } else if (nextStep == 4) {
             toogleParticleSystems();
             getLocalizedPhrase("S1_P4", whiteText);
-            changeParticlesToColor(Color.white);
         }
 
         
@@ -135,15 +132,6 @@ public class IntroScene : MonoBehaviour {
         bool whiteCurrent = whiteParticleSystem.activeInHierarchy;
         whiteParticleSystem.SetActive(!whiteCurrent);
         blackParticleSystem.SetActive(whiteCurrent);
-    }
-
-    private void changeParticlesToColor(Color color) {
-        ParticleSystem pss = whiteParticleSystem.GetComponent<ParticleSystem>();
-        ParticleSystem.Particle[] ps = new ParticleSystem.Particle[pss.maxParticles];
-        int count = pss.GetParticles(ps);
-        for (int i = 0; i < count; i++) {
-            ps[i].startColor = color;
-        }
     }
 
     IEnumerator FadeWall(GameObject wall, float duration) {

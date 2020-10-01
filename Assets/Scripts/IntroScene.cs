@@ -36,6 +36,8 @@ public class IntroScene : MonoBehaviour {
     public int previousStep = 0;
     private Animator animator;
 
+    private EventHandler eventHandler = EventHandler.get();
+
     void Start() {
 
         blackParticleSystem.GetComponent<ParticleSystem>().startColor = Color.black;
@@ -85,6 +87,8 @@ public class IntroScene : MonoBehaviour {
             laserWhite.GetComponent<LaserController>().FadeOut();
             textAnimations();
         }
+
+        eventHandler.notifyStepChange();
     }
 
     public void textAnimations() {
@@ -93,8 +97,10 @@ public class IntroScene : MonoBehaviour {
         IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 3.7f, null);
         IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 3.7f, fadeInRuppyText);
         IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 2, 8, fadeInEssayText);
+
         ParticleSystem.EmissionModule emission = whiteParticleSystem.GetComponent<ParticleSystem>().emission;
         emission.rateOverTime = 0;
+
         StartCoroutine(fadeOutWhiteText);
     }
 
@@ -105,8 +111,9 @@ public class IntroScene : MonoBehaviour {
         if (nextStep == 1) {
             toogleParticleSystems();
             blackText.text = "about how life can feel bright";
+            mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudio);
-            getLocalizedPhrase("S1_P1", blackText);            
+            getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
             toogleParticleSystems();
             getLocalizedPhrase("S1_P2", whiteText);
@@ -117,15 +124,13 @@ public class IntroScene : MonoBehaviour {
             StartCoroutine(FadeWall(wall02, 0.6f));
             getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
-            mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
+            mirrorBlack.transform.position = new Vector3(7.36f, 0f, 0f);
+            mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudioLate);
         } else if (nextStep == 4) {
             toogleParticleSystems();
             getLocalizedPhrase("S1_P4", whiteText);
         }
-
-        
-
     }
 
     private void toogleParticleSystems() {

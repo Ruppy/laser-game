@@ -20,11 +20,18 @@ public class CameraController : MonoBehaviour
     private bool isPlayerMoving = false;
     private bool isMainBoxGlowing = false;
 
+    //TODO: Change to make it more generic
+    //Maybe if BoxController implements an interface like "Objectivable"
+    //that responds to "isFinished()" and instead of BoxController[]
+    //we have a Objecitvable[]
+    public BoxController[] objectives;
+
     private void OnEnable() {
         EventHandler.onMainBoxGlowing += OnMainBoxGlowing;
         EventHandler.onMainBoxDulling += onMainBoxDulling;
         EventHandler.onIsPlayerIdle += OnIsPlayerIdle;
         EventHandler.onIsPlayerMoving += OnIsPlayerMoving;
+        EventHandler.onStepChange += OnStepChange;
     }
 
 
@@ -33,13 +40,15 @@ public class CameraController : MonoBehaviour
         EventHandler.onMainBoxDulling -= onMainBoxDulling;
         EventHandler.onIsPlayerIdle -= OnIsPlayerIdle;
         EventHandler.onIsPlayerMoving -= OnIsPlayerMoving;
+        EventHandler.onStepChange -= OnStepChange;
+    }
+
+    public void OnStepChange() {
+        reloadObjectives();
     }
 
     public void OnIsPlayerIdle() {
         isPlayerMoving = false;
-        if(isMainBoxGlowing) {
-            StartCoroutine("LerpColor");
-        }
     }
 
     public void OnIsPlayerMoving() {
@@ -64,12 +73,29 @@ public class CameraController : MonoBehaviour
         enabled = false;
         scriptsObject = GameObject.Find("Scripts");
         movementScript = scriptsObject.GetComponent<MovementController>();
+        reloadObjectives();
     }
 
     void Update() {
-
+        if (allObjectivesAreFinished()) {
+            objectives = null;
+            StartCoroutine("LerpColor");
+        }
     }
 
+    protected bool allObjectivesAreFinished() {
+        if (objectives == null || objectives.Length == 0) { return false; }
+
+        foreach(BoxController controller in objectives) {
+            if (controller.isSatisfied == false) { return false; }
+        }
+
+        return true;
+    }
+
+    protected void reloadObjectives() {
+        objectives = FindObjectsOfType(typeof(BoxController)) as BoxController[];
+    }
 
     private bool areColorsTooEqual() {
         float redDifference = Math.Abs(changeToColor.r - changeFromColor.r);

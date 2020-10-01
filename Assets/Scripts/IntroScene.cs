@@ -22,6 +22,8 @@ public class IntroScene : MonoBehaviour {
     public GameObject wall04;
     public GameObject wall05;
     public AudioSource audioSource;
+    public GameObject whiteParticleSystem;
+    public GameObject blackParticleSystem;
 
     public AudioClip bellsAudio;
     public AudioClip bellsAudioMid;
@@ -35,6 +37,10 @@ public class IntroScene : MonoBehaviour {
     private Animator animator;
 
     void Start() {
+
+        blackParticleSystem.GetComponent<ParticleSystem>().startColor = Color.black;
+        blackParticleSystem.SetActive(false);
+
         scenes.Add(0, new List<GameObject>() { laserWhite, boxWhite, mirrorWhite });
         scenes.Add(1, new List<GameObject>() { mirrorBlack, boxBlack, laserBlack });
         scenes.Add(2, new List<GameObject>() { laserWhite, mirrorWhite, boxWhite, wall01, wall02, mirrorWhite02, wall03, wall04, wall05 });
@@ -87,7 +93,8 @@ public class IntroScene : MonoBehaviour {
         IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 3.7f, null);
         IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 3.7f, fadeInRuppyText);
         IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 2, 8, fadeInEssayText);
-        
+        ParticleSystem.EmissionModule emission = whiteParticleSystem.GetComponent<ParticleSystem>().emission;
+        emission.rateOverTime = 0;
         StartCoroutine(fadeOutWhiteText);
     }
 
@@ -96,25 +103,35 @@ public class IntroScene : MonoBehaviour {
         enableScene(nextStep);
 
         if (nextStep == 1) {
+            toogleParticleSystems();
             blackText.text = "about how life can feel bright";
             audioSource.PlayOneShot(bellsAudio);
-            getLocalizedPhrase("S1_P1", blackText);
+            getLocalizedPhrase("S1_P1", blackText);            
         } else if (nextStep == 2) {
+            toogleParticleSystems();
             getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
             audioSource.PlayOneShot(bellsAudioMid);
         } else if (nextStep == 3) {
+            toogleParticleSystems();
             StartCoroutine(FadeWall(wall02, 0.6f));
             getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
             audioSource.PlayOneShot(bellsAudioLate);
         } else if (nextStep == 4) {
+            toogleParticleSystems();
             getLocalizedPhrase("S1_P4", whiteText);
         }
 
         
 
+    }
+
+    private void toogleParticleSystems() {
+        bool whiteCurrent = whiteParticleSystem.activeInHierarchy;
+        whiteParticleSystem.SetActive(!whiteCurrent);
+        blackParticleSystem.SetActive(whiteCurrent);
     }
 
     IEnumerator FadeWall(GameObject wall, float duration) {

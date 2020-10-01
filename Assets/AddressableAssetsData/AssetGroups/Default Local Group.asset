@@ -16,7 +16,14 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 6b4e02ae7bfb3ed4aaaa0330ac2141d5
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 4fe8353b0fe34274fa935e54596db3ef
+    m_Address: Assets/black-material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_mainAssetType: 
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 18a82d9beecce1c4bbe535c6b1e20ae9, type: 2}
   m_SchemaSet:

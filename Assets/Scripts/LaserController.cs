@@ -105,7 +105,7 @@ public class LaserController : MonoBehaviour
           laserPoints[pointIndex] = transform.InverseTransformPoint(hitPosition);
 
           GameObject hitObject = hit.collider.gameObject;
-          if (hitObject.CompareTag("Mirror")) {
+          if (hitObject.CompareTag("Mirror") || hitObject.CompareTag("ReflectiveObject")) {
               GameObject mirrorGameObject = hitObject;
 
               if (lastCollideObject == gameObject) {

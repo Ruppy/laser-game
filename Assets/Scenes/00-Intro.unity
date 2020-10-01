@@ -1130,7 +1130,7 @@ GameObject:
   - component: {fileID: 628202305}
   m_Layer: 0
   m_Name: Wall04
-  m_TagString: Mirror
+  m_TagString: ReflectiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1359,7 +1359,7 @@ GameObject:
   - component: {fileID: 717658619}
   m_Layer: 0
   m_Name: Wall05
-  m_TagString: Mirror
+  m_TagString: ReflectiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1654,7 +1654,7 @@ GameObject:
   - component: {fileID: 1051206177}
   m_Layer: 0
   m_Name: Wall01
-  m_TagString: Mirror
+  m_TagString: ReflectiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6561,6 +6561,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468240826}
     m_Modifications:
+    - target: {fileID: 451270076, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085116, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_Name
@@ -7032,7 +7036,7 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6724682
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
@@ -7042,17 +7046,17 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.38268343
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
@@ -7077,7 +7081,7 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -45
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
@@ -11881,7 +11885,7 @@ GameObject:
   - component: {fileID: 1583562794}
   - component: {fileID: 1583562795}
   - component: {fileID: 1583562796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11898,7 +11902,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.885675, y: 3.0275319, z: -2.2395985}
   m_LocalScale: {x: 3, y: 3, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1666987247}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12003,6 +12008,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMoveSpeed: 50
   shiftMoveSpeed: 10
+  collidingMirror: {fileID: 0}
+  isMovingMirror: 0
+  mirrorPositionDifference: {x: 0, y: 0, z: 0}
 --- !u!1 &1598349107
 GameObject:
   m_ObjectHideFlags: 0
@@ -12278,6 +12286,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1666987246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1666987247}
+  - component: {fileID: 1666987248}
+  m_Layer: 8
+  m_Name: InteractionDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1666987247
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666987246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1583562792}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1666987248
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666987246}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1 &1857258658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6306998039477059289, guid: eee271d758755452babf4ecd788d92f9,
@@ -12521,7 +12576,7 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.29
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
@@ -12802,7 +12857,7 @@ GameObject:
   - component: {fileID: 2084263510}
   m_Layer: 0
   m_Name: Wall03
-  m_TagString: Mirror
+  m_TagString: ReflectiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

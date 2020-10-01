@@ -111,6 +111,7 @@ public class IntroScene : MonoBehaviour {
         if (nextStep == 1) {
             toogleParticleSystems();
             blackText.text = "about how life can feel bright";
+            mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudio);
             getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
@@ -123,7 +124,8 @@ public class IntroScene : MonoBehaviour {
             StartCoroutine(FadeWall(wall02, 0.6f));
             getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
-            mirrorBlack.transform.position = new Vector3(7.36f, -0.29f, 0f);
+            mirrorBlack.transform.position = new Vector3(7.36f, 0f, 0f);
+            mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudioLate);
         } else if (nextStep == 4) {
             toogleParticleSystems();

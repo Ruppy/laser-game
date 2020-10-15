@@ -6905,32 +6905,32 @@ PrefabInstance:
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0.4772606
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.50962186
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0.5188679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0.4772606
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0.50962186
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.5188679
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371354, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
@@ -7001,6 +7001,11 @@ PrefabInstance:
         type: 3}
       propertyPath: hitIdentifier
       value: white
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302452808054371356, guid: dc52135453fe1405d952fd87e3d9833a,
+        type: 3}
+      propertyPath: laserHitParticleMaterial
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc52135453fe1405d952fd87e3d9833a, type: 3}
@@ -12731,6 +12736,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468240826}
     m_Modifications:
+    - target: {fileID: 209915796717871709, guid: dc52135453fe1405d952fd87e3d9833a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7302452808054371353, guid: dc52135453fe1405d952fd87e3d9833a,
         type: 3}
       propertyPath: m_Name

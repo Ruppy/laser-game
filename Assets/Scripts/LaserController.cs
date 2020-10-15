@@ -5,6 +5,10 @@ using UnityEngine;
 public class LaserController : MonoBehaviour
 {
 
+    private Material laserHitParticleMaterial;
+    private GameObject laserHitParticle;
+    private int particlePositionIndex = -1;
+
     private LineRenderer line;
     private RaycastHit2D hit;
     private float lineLength = 100f;
@@ -32,9 +36,23 @@ public class LaserController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        line = GetComponent<LineRenderer>();
+        laserHitParticle = transform.Find("HitParticle").gameObject;
+        foreach (ParticleSystemRenderer p in gameObject.GetComponentsInChildren<ParticleSystemRenderer>())
+         {
+            Debug.Log(line);
+             //p.material.shader= Shader.Find(p.material.shader.name);
+             //p.material.SetColor("Color_B590FB45", line.endColor);
+             p.material.SetColor("Color_B590FB45", line.endColor);
+         }
+        /*if (laserHitParticle) {
+            ParticleSystemRenderer ps = laserHitParticle.GetComponent<ParticleSystemRenderer>();
+            ps.material.SetColor("Color_B590FB45", line.endColor);
+            laserHitParticle.SetActive(false);
+        }*/
+
         laserPoints = new Vector3[30];
         totalOfLaserPoints = 0;
-        line = GetComponent<LineRenderer>();
         edgeCollider = GetComponent<EdgeCollider2D>();
     }
 
@@ -56,9 +74,25 @@ public class LaserController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        particlePositionIndex = -1;
+
         calculatePoints();
         renderLaserPoints();
         renderLaserCollider();
+        renderLaserHitParticle();
+    }
+
+    void renderLaserHitParticle() {
+        if (laserHitParticle == null) { return; }
+
+        if (particlePositionIndex == -1) {
+            laserHitParticle.SetActive(false);
+            return;
+        }
+
+        laserHitParticle.SetActive(true);
+        Vector3 hitPosition = transform.TransformPoint(laserPoints[particlePositionIndex]);
+        laserHitParticle.transform.position = hitPosition;
     }
 
     void renderLaserPoints() {
@@ -133,6 +167,7 @@ public class LaserController : MonoBehaviour
                     currentBox = boxController;
                 }
                 eventHandler.notifyLaserHitBox(this, currentBox);
+                particlePositionIndex = pointIndex;
                 break;
           }
           else {

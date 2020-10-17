@@ -189,13 +189,30 @@ public class IntroScene : MonoBehaviour {
         }
     }
 
-    private void getLocalizedPhrase(string key, Text toChange) {
-        var op = UnityEngine.Localization.Settings.LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Phrases", key);
-        if (op.IsDone)
-            toChange.text = op.Result;
-        else
-            op.Completed += (o) => toChange.text = op.Result;
+    private void textAnimation(Text toChange, string text, float delay = 1.5f, bool animate = true) {
+        if (animate == false) {
+            toChange.text = text;
+            return;
+        }
 
+        float textSize = text.Length;
+        float duration = textSize / 12f;
+        toChange.text = "";
+        //toChange.text = new string (' ', (int)textSize + 5);
+        DOTween.Sequence().SetEase(Ease.Linear)
+            .PrependInterval(delay)
+            .Append(toChange.DOText(text, duration, false));
     }
 
+    private void getLocalizedPhrase(string key, Text toChange) {
+        var op = UnityEngine.Localization.Settings.LocalizationSettings
+                    .StringDatabase.GetLocalizedStringAsync("Phrases", key);
+        if (op.IsDone) {
+            textAnimation(toChange, op.Result);
+        }
+        else {
+            op.Completed += (o) => textAnimation(toChange, op.Result, 0.5f);
+        }
+
+    }
 }

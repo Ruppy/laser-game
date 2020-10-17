@@ -15,6 +15,7 @@ public class BoxController : MonoBehaviour
     private Color defaultColor;
 
     private SpriteRenderer renderer;
+    private ParticleSystem particles;
     private Sequence glowSequence;
 
     private EventHandler eventHandler = EventHandler.get();
@@ -44,6 +45,7 @@ public class BoxController : MonoBehaviour
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
+        particles = GetComponent<ParticleSystem>();
         defaultColor = renderer.material.GetColor("Color_91248870");
     }
 
@@ -52,7 +54,7 @@ public class BoxController : MonoBehaviour
         eventHandler.notifyMainBoxGlowing(this);
         isGlowing = true;
         renderer.material.DOColor(finalGlowColor, "Color_91248870", 0.25f);
-
+        particles.Play();
         glowSequence = DOTween.Sequence().SetEase(Ease.OutSine)
             .Append(transform.DOScale(new Vector3(1.2f, 1.2f, 1f), 0.15f))
             .Append(transform.DOScale(new Vector3(1.08f, 1.08f, 1f), 0.1f))

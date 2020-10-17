@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BoxController : MonoBehaviour
 {
@@ -65,6 +66,9 @@ public class BoxController : MonoBehaviour
             increaseGlowCoroutine = StartCoroutine(IncreaseGlow(1.2f));
         }
 
+        DOTween.Sequence().SetEase(Ease.OutSine)
+            .Append(transform.DOScale(new Vector3(1.2f, 1.2f, 1f), 0.15f))
+            .Append(transform.DOScale(new Vector3(1.08f, 1.08f, 1f), 0.1f));
     }
 
     private void Dull() {
@@ -75,6 +79,10 @@ public class BoxController : MonoBehaviour
         StopCoroutine(increaseGlowCoroutine);
         increaseGlowCoroutine = null;
         isSatisfied = false;
+
+        DOTween.Sequence().SetEase(Ease.InSine)
+            .Append(transform.DOScale(new Vector3(0.9f, 0.9f, 1f), 0.15f))
+            .Append(transform.DOScale(new Vector3(1, 1, 1), 0.1f));
     }
 
     //TODO: This routine does not increase glow yet.
@@ -87,6 +95,9 @@ public class BoxController : MonoBehaviour
             yield return new WaitForSeconds(smoothness);
         }
         isSatisfied = true;
+
+        //Sequence mySequence = DOTween.Sequence();
+        //DOTween.Sequence().PrependInterval(0.8f).Append(transform.DOScale(0.2f, 0.3f));
     }
 
 }

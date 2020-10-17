@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class IntroScene : MonoBehaviour {
     public GameObject laserBlack;
@@ -39,6 +40,7 @@ public class IntroScene : MonoBehaviour {
     private EventHandler eventHandler = EventHandler.get();
 
     void Start() {
+        ﻿﻿﻿﻿DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(200, 10);
 
         blackParticleSystem.GetComponent<ParticleSystem>().startColor = Color.black;
         blackParticleSystem.SetActive(false);

@@ -6788,6 +6788,26 @@ PrefabInstance:
       propertyPath: hitIdentifier
       value: white
       objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.r
+      value: 2.6390157
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.g
+      value: 2.6390157
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.b
+      value: 2.6390157
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6306998039477059288, guid: eee271d758755452babf4ecd788d92f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7061,12 +7081,12 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.38268343
+      value: -0.30070576
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 0.953717
       objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
@@ -7086,7 +7106,7 @@ PrefabInstance:
     - target: {fileID: 7308854007618085117, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 45
+      value: -35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
@@ -12646,6 +12666,26 @@ PrefabInstance:
         type: 3}
       propertyPath: hitIdentifier
       value: black
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6306998039477059285, guid: eee271d758755452babf4ecd788d92f9,
+        type: 3}
+      propertyPath: finalGlowColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6306998039477059288, guid: eee271d758755452babf4ecd788d92f9,
         type: 3}

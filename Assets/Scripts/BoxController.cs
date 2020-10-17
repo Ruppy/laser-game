@@ -8,8 +8,6 @@ public class BoxController : MonoBehaviour
     public float hitDelay = 0.15f;
     public string hitIdentifier = "";
     public bool isSatisfied = false;
-
-    private bool isBeingHit = false;
     private bool isGlowing = false;
 
     [ColorUsage(true, true)]
@@ -33,13 +31,13 @@ public class BoxController : MonoBehaviour
 
     public void boxBeingHit(LaserController laserController, BoxController boxController) {
         if(laserController.hitIdentifier.Equals(this.hitIdentifier)) {
-            isBeingHit = true;
+            Glow();
         }
     }
 
     public void boxStoppedBeingHit(LaserController laserController, BoxController boxController) {
         if (laserController.hitIdentifier.Equals(this.hitIdentifier)) {
-            isBeingHit = false;
+            Dull();
         }
     }
 
@@ -47,15 +45,6 @@ public class BoxController : MonoBehaviour
     {
         renderer = GetComponent<SpriteRenderer>();
         defaultColor = renderer.material.GetColor("Color_91248870");
-    }
-
-    void Update() {
-        if (isBeingHit) {
-            Glow();
-        }
-        else {
-            Dull();
-        }
     }
 
     private void Glow() {

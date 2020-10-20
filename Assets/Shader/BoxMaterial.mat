@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BoxMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 5acf90dad58084aeba8b07456a273cc6,
+  m_Shader: {fileID: -6465566751694194690, guid: b77059934ed474fcf87218fdc99c0153,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -48,7 +48,8 @@ Material:
     - PixelSnap: 0
     - _EnableExternalAlpha: 0
     m_Colors:
-    - Color_1B3E087: {r: 0.8409814, g: 0.8409814, b: 0.8409814, a: 0}
+    - Color_1B3E087: {r: 0, g: 0, b: 0, a: 1}
+    - Color_91248870: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

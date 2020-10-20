@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BoxController : MonoBehaviour
 {
     public float hitDelay = 0.15f;
     public string hitIdentifier = "";
     public bool isSatisfied = false;
-
-    private bool isBeingHit = false;
     private bool isGlowing = false;
 
-    public Material glowMaterial;
-    private Material spriteMaterial;
+    [ColorUsage(true, true)]
+    public Color finalGlowColor;
+    private Color defaultColor;
 
     private SpriteRenderer renderer;
-    private Coroutine increaseGlowCoroutine;
+    private ParticleSystem particles;
+    private Sequence glowSequence;
 
     private EventHandler eventHandler = EventHandler.get();
 
@@ -31,62 +32,51 @@ public class BoxController : MonoBehaviour
 
     public void boxBeingHit(LaserController laserController, BoxController boxController) {
         if(laserController.hitIdentifier.Equals(this.hitIdentifier)) {
-            isBeingHit = true;
+            Glow();
         }
     }
 
     public void boxStoppedBeingHit(LaserController laserController, BoxController boxController) {
         if (laserController.hitIdentifier.Equals(this.hitIdentifier)) {
-            isBeingHit = false;
+            Dull();
         }
     }
 
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
-        spriteMaterial = renderer.material;
-    }
-
-    void Update() {
-        if (isBeingHit) {
-            Glow();
-        }
-        else {
-            Dull();
-        }
+        particles = GetComponent<ParticleSystem>();
+        defaultColor = renderer.material.GetColor("Color_91248870");
     }
 
     private void Glow() {
         if (isGlowing) return;
-        renderer.material = glowMaterial;
         eventHandler.notifyMainBoxGlowing(this);
         isGlowing = true;
-        if (increaseGlowCoroutine == null) {
-            increaseGlowCoroutine = StartCoroutine(IncreaseGlow(1.2f));
-        }
-
+        renderer.material.DOColor(finalGlowColor, "Color_91248870", 0.25f);
+        particles.Play();
+        glowSequence = DOTween.Sequence().SetEase(Ease.OutSine)
+            .Append(transform.DOScale(new Vector3(1.2f, 1.2f, 1f), 0.15f))
+            .Append(transform.DOScale(new Vector3(1.08f, 1.08f, 1f), 0.1f))
+            .AppendInterval(1.25f)
+            .OnComplete(() => {
+                isSatisfied = true;
+                glowSequence = null;
+            });
     }
 
     private void Dull() {
         if (!isGlowing) return;
-        renderer.material = spriteMaterial;
         eventHandler.notifyMainBoxDulling(this);
         isGlowing = false;
-        StopCoroutine(increaseGlowCoroutine);
-        increaseGlowCoroutine = null;
         isSatisfied = false;
-    }
 
-    //TODO: This routine does not increase glow yet.
-    IEnumerator IncreaseGlow(float duration) {
-        float progress = 0;
-        float smoothness = 0.1f;
-        float increment = smoothness / duration;
-        while (progress < 1) {
-            progress += increment;
-            yield return new WaitForSeconds(smoothness);
-        }
-        isSatisfied = true;
-    }
+        if (glowSequence != null) { glowSequence.Kill(false); }
 
+        renderer.material.DOColor(defaultColor, "Color_91248870", 0.25f);
+
+        DOTween.Sequence().SetEase(Ease.InSine)
+            .Append(transform.DOScale(new Vector3(0.9f, 0.9f, 1f), 0.15f))
+            .Append(transform.DOScale(new Vector3(1, 1, 1), 0.1f));
+    }
 }

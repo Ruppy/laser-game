@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class IntroScene : MonoBehaviour {
     public GameObject laserBlack;
@@ -39,6 +40,7 @@ public class IntroScene : MonoBehaviour {
     private EventHandler eventHandler = EventHandler.get();
 
     void Start() {
+        ﻿﻿﻿﻿DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(200, 10);
 
         blackParticleSystem.GetComponent<ParticleSystem>().startColor = Color.black;
         blackParticleSystem.SetActive(false);
@@ -71,6 +73,7 @@ public class IntroScene : MonoBehaviour {
         getLocalizedPhrase("S1_P0", whiteText);
         getLocalizedPhrase("INTRO", essayText);
         getLocalizedPhrase("BY_RUPPY", ruppyText);
+        blackText.text = "";
 
         enableScene(0);
         animator = GameObject.Find("Puzzle").GetComponent<Animator>();
@@ -92,16 +95,16 @@ public class IntroScene : MonoBehaviour {
     }
 
     public void textAnimations() {
-        Color whiteColor = Color.white;
-        Color blackColor = new Color(1f, 1f, 1f, 0f);
-        IEnumerator fadeInRuppyText = AnimateText(ruppyText, blackColor, whiteColor, 0, 3.7f, null);
-        IEnumerator fadeInEssayText = AnimateText(essayText, blackColor, whiteColor, 0, 3.7f, fadeInRuppyText);
-        IEnumerator fadeOutWhiteText = AnimateText(whiteText, whiteColor, blackColor, 2, 8, fadeInEssayText);
-
         ParticleSystem.EmissionModule emission = whiteParticleSystem.GetComponent<ParticleSystem>().emission;
         emission.rateOverTime = 0;
 
-        StartCoroutine(fadeOutWhiteText);
+        essayText.gameObject.SetActive(true);
+        ruppyText.gameObject.SetActive(true);
+        DOTween.Sequence()
+            .AppendInterval(3)
+            .Append(whiteText.DOFade(0, 8))
+            .Append(essayText.DOFade(1, 3.7f).From(0))
+            .Append(ruppyText.DOFade(1, 3.7f).From(0));
     }
 
     public void WillIncreaseStep() {
@@ -121,7 +124,7 @@ public class IntroScene : MonoBehaviour {
             audioSource.PlayOneShot(bellsAudioMid);
         } else if (nextStep == 3) {
             toogleParticleSystems();
-            StartCoroutine(FadeWall(wall02, 0.6f));
+            wall02.GetComponent<SpriteRenderer>().DOFade(0f, 0.6f);
             getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
             mirrorBlack.transform.position = new Vector3(7.36f, 0f, 0f);
@@ -139,40 +142,6 @@ public class IntroScene : MonoBehaviour {
         blackParticleSystem.SetActive(whiteCurrent);
     }
 
-    IEnumerator FadeWall(GameObject wall, float duration) {
-        float progress = 0;
-        float smoothness = 0.1f;
-        float increment = smoothness / duration;
-        SpriteRenderer renderer = wall.GetComponent<SpriteRenderer>();
-        Color startColor = renderer.color;
-        Color endColor = startColor;
-        endColor.a = 0;
-        while (progress < 1) {
-            progress += increment;
-            Color newColor = Color.Lerp(startColor, endColor, progress);
-            renderer.color = newColor;
-            yield return new WaitForSeconds(smoothness);
-        }
-    }
-
-    IEnumerator AnimateText(Text text, Color startColor, Color endColor, float delay, float duration, IEnumerator onEnd) {
-        yield return new WaitForSeconds(delay);
-        text.gameObject.SetActive(true);
-        float progress = 0;
-        float smoothness = 0.1f;
-        float increment = smoothness / duration;
-        while (progress < 1) {
-            progress += increment;
-            Color newColor = Color.Lerp(startColor, endColor, progress);
-            text.color = newColor;
-            yield return new WaitForSeconds(smoothness);
-        }
-
-        if (onEnd != null) {
-            StartCoroutine(onEnd);
-        }
-    }
-
     private void disableScene(int sceneNumber) {
         Debug.Log("Disabling scene " + sceneNumber);
         foreach (GameObject gameObject in scenes[sceneNumber]) {
@@ -187,13 +156,28 @@ public class IntroScene : MonoBehaviour {
         }
     }
 
-    private void getLocalizedPhrase(string key, Text toChange) {
-        var op = UnityEngine.Localization.Settings.LocalizationSettings.StringDatabase.GetLocalizedStringAsync("Phrases", key);
-        if (op.IsDone)
-            toChange.text = op.Result;
-        else
-            op.Completed += (o) => toChange.text = op.Result;
+    private void animateTextCharByChar(Text toChange, string text, float delay = 0.8f, bool animate = true) {
+        if (animate == false) {
+            toChange.text = text;
+            return;
+        }
 
+        float textSize = text.Length;
+        float duration = textSize / 16f;
+        toChange.text = "";
+        DOTween.Sequence().SetEase(Ease.Linear)
+            .PrependInterval(delay)
+            .Append(toChange.DOText(text, duration, false));
     }
 
+    private void getLocalizedPhrase(string key, Text toChange) {
+        var op = UnityEngine.Localization.Settings.LocalizationSettings
+                    .StringDatabase.GetLocalizedStringAsync("Phrases", key);
+        if (op.IsDone) {
+            animateTextCharByChar(toChange, op.Result);
+        }
+        else {
+            op.Completed += (o) => animateTextCharByChar(toChange, op.Result, 0.5f);
+        }
+    }
 }

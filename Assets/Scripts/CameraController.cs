@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.LowLevel;
+using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
@@ -29,8 +30,6 @@ public class CameraController : MonoBehaviour
     private void OnEnable() {
         EventHandler.onMainBoxGlowing += OnMainBoxGlowing;
         EventHandler.onMainBoxDulling += onMainBoxDulling;
-        EventHandler.onIsPlayerIdle += OnIsPlayerIdle;
-        EventHandler.onIsPlayerMoving += OnIsPlayerMoving;
         EventHandler.onStepChange += OnStepChange;
     }
 
@@ -38,21 +37,11 @@ public class CameraController : MonoBehaviour
     private void OnDisable() {
         EventHandler.onMainBoxGlowing -= OnMainBoxGlowing;
         EventHandler.onMainBoxDulling -= onMainBoxDulling;
-        EventHandler.onIsPlayerIdle -= OnIsPlayerIdle;
-        EventHandler.onIsPlayerMoving -= OnIsPlayerMoving;
         EventHandler.onStepChange -= OnStepChange;
     }
 
     public void OnStepChange() {
         reloadObjectives();
-    }
-
-    public void OnIsPlayerIdle() {
-        isPlayerMoving = false;
-    }
-
-    public void OnIsPlayerMoving() {
-        isPlayerMoving = true;
     }
 
     public void OnMainBoxGlowing(BoxController boxController) {
@@ -79,7 +68,13 @@ public class CameraController : MonoBehaviour
     void Update() {
         if (allObjectivesAreFinished()) {
             objectives = null;
-            StartCoroutine("LerpColor");
+            scriptsObject.SendMessage("WillIncreaseStep");
+            camera.DOColor(changeToColor, 1f)
+                .OnComplete(() => {
+                    camera.backgroundColor = changeToColor;
+                    changeFromColor = changeToColor;
+                    scriptsObject.SendMessage("IncreaseStep");
+                });;
         }
     }
 
@@ -95,31 +90,5 @@ public class CameraController : MonoBehaviour
 
     protected void reloadObjectives() {
         objectives = FindObjectsOfType(typeof(BoxController)) as BoxController[];
-    }
-
-    private bool areColorsTooEqual() {
-        float redDifference = Math.Abs(changeToColor.r - changeFromColor.r);
-        float greenDifference = Math.Abs(changeToColor.g - changeFromColor.g);
-        float blueDifference = Math.Abs(changeToColor.b - changeFromColor.b);
-        return (redDifference + greenDifference + blueDifference) < 0.2f;
-    }
-
-    IEnumerator LerpColor() { // http://answers.unity.com/answers/755415/view.html
-        float progress = 0;
-        float smoothness = 0.02f;
-        float duration = 5;
-        float increment = smoothness / duration;
-        scriptsObject.SendMessage("WillIncreaseStep");
-        while (progress < 1) {
-            if (areColorsTooEqual()) break;
-            progress += increment;
-            Color newColor = Color.Lerp(changeFromColor, changeToColor, progress);
-            camera.backgroundColor = newColor;
-            changeFromColor = newColor;
-            yield return new WaitForSeconds(smoothness);
-        }
-        camera.backgroundColor = changeToColor;
-        changeFromColor = changeToColor;
-        scriptsObject.SendMessage("IncreaseStep");
     }
 }

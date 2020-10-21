@@ -1851,7 +1851,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c89e4ff3694aba749ba133702d3d1048, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -7258,7 +7258,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c89e4ff3694aba749ba133702d3d1048, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -12092,11 +12092,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1583562791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5817cfde815f14ef4bd6698ae1c356b3, type: 3}
+  m_Script: {fileID: 11500000, guid: c7021d20645775446afe656ea52d0eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveSpeed: 50
-  shiftMoveSpeed: 10
+  shiftMoveSpeed: 20
   collidingMirror: {fileID: 0}
   isMovingMirror: 0
   mirrorPositionDifference: {x: 0, y: 0, z: 0}

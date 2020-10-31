@@ -40,7 +40,7 @@ public class LaserController : MonoBehaviour
         laserHitParticle = transform.Find("HitParticle").gameObject;
         foreach (ParticleSystemRenderer p in gameObject.GetComponentsInChildren<ParticleSystemRenderer>())
          {
-            Debug.Log(line);
+             //Debug.Log(line);
              //p.material.shader= Shader.Find(p.material.shader.name);
              //p.material.SetColor("Color_B590FB45", line.endColor);
              p.material.SetColor("Color_B590FB45", line.endColor);

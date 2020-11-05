@@ -21,10 +21,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BackgroundParticleMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 6762cd86604c64aaa9e8b715eb119d28,
+  m_Shader: {fileID: -6465566751694194690, guid: f1083a035f857fd4794e20f9b04cf41f,
     type: 3}
-  m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF
-  m_LightmapFlags: 4
+  m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _RECEIVE_SHADOWS_OFF
+  m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -35,6 +35,10 @@ Material:
     m_TexEnvs:
     - Texture2D_1C827FD2:
         m_Texture: {fileID: 2800000, guid: afc6acce64d33424d8f1300fc65348ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_DF9BC339:
+        m_Texture: {fileID: 2800000, guid: 8f31aed136a404684b800d6ff42330f5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -82,17 +86,33 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_84409E3F: 0.1
+    - Vector1_E1D979A2: 20
     - _AlphaClip: 0
     - _Blend: 0
+    - _BlendOp: 0
     - _BumpScale: 1
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
+    - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0
     - _DstBlend: 0
+    - _EmissionEnabled: 0
     - _EnvironmentReflections: 1
+    - _FlipbookBlending: 0
+    - _FlipbookMode: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _InvFade: 1
+    - _LightingEnabled: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -101,6 +121,9 @@ Material:
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
@@ -108,8 +131,17 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_91248870: {r: 1, g: 1, b: 1, a: 0}
+    - Color_A593CE29: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
     - Color_B590FB45: {r: 1, g: 1, b: 1, a: 0.36078432}
+    - Vector2_475FB791: {r: -2, g: 0, b: 0, a: 0}
+    - Vector2_F0EA4587: {r: -2, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0.5}

@@ -24,7 +24,6 @@ public class IntroScene : MonoBehaviour {
     public GameObject wall05;
     public AudioSource audioSource;
     public GameObject whiteParticleSystem;
-    public GameObject blackParticleSystem;
 
     public AudioClip bellsAudio;
     public AudioClip bellsAudioMid;
@@ -41,9 +40,6 @@ public class IntroScene : MonoBehaviour {
 
     void Start() {
         ﻿﻿﻿﻿DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(200, 10);
-
-        blackParticleSystem.GetComponent<ParticleSystem>().startColor = Color.black;
-        blackParticleSystem.SetActive(false);
 
         scenes.Add(0, new List<GameObject>() { laserWhite, boxWhite, mirrorWhite });
         scenes.Add(1, new List<GameObject>() { mirrorBlack, boxBlack, laserBlack });
@@ -112,18 +108,18 @@ public class IntroScene : MonoBehaviour {
         enableScene(nextStep);
 
         if (nextStep == 1) {
-            toogleParticleSystems();
+            toogleParticleSystemColor();
             blackText.text = "about how life can feel bright";
             mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudio);
             getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
-            toogleParticleSystems();
+            toogleParticleSystemColor();
             getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
             audioSource.PlayOneShot(bellsAudioMid);
         } else if (nextStep == 3) {
-            toogleParticleSystems();
+            toogleParticleSystemColor();
             wall02.GetComponent<SpriteRenderer>().DOFade(0f, 0.6f);
             getLocalizedPhrase("S1_P3", blackText);
             boxBlack.transform.position = new Vector3(-5f, -0.1f, 0f);
@@ -131,15 +127,23 @@ public class IntroScene : MonoBehaviour {
             mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudioLate);
         } else if (nextStep == 4) {
-            toogleParticleSystems();
+            toogleParticleSystemColor();
             getLocalizedPhrase("S1_P4", whiteText);
         }
     }
 
-    private void toogleParticleSystems() {
-        bool whiteCurrent = whiteParticleSystem.activeInHierarchy;
-        whiteParticleSystem.SetActive(!whiteCurrent);
-        blackParticleSystem.SetActive(whiteCurrent);
+    private void toogleParticleSystemColor() {
+        Renderer renderer = whiteParticleSystem.GetComponent<ParticleSystem>().GetComponent<Renderer>();
+        String property = "Color_B590FB45";
+        Color black = new Color(0.000f, 0.000f, 0.000f, 0.361f);
+        Color white = new Color(1.000f, 1.000f, 1.000f, 0.361f);
+        Color changeTo;
+        if(renderer.material.GetColor(property) == black) {
+            changeTo = white;
+        } else {
+            changeTo = black;
+        }
+        renderer.material.DOColor(changeTo, property, 1f);
     }
 
     private void disableScene(int sceneNumber) {
@@ -150,7 +154,7 @@ public class IntroScene : MonoBehaviour {
     }
 
     private void enableScene(int sceneNumber) {
-        Debug.Log("Enabling scene " + sceneNumber);
+        //Debug.Log("Enabling scene " + sceneNumber);
         foreach (GameObject gameObject in scenes[sceneNumber]) {
             gameObject.SetActive(true);
         }

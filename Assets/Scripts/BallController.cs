@@ -58,6 +58,7 @@ public class BallController : MonoBehaviour
     }
 
     void StartDrag(GameObject dragObject) {
+        this.GetComponent<Renderer>().enabled = false;
         collidingMirror = dragObject;
         isMovingMirror = true;
         mirrorPositionDifference = transform.position - dragObject.transform.position;
@@ -68,6 +69,7 @@ public class BallController : MonoBehaviour
         if (collidingMirror) {
             collidingMirror.GetComponent<Collider2D>().isTrigger = false;
         }
+        this.GetComponent<Renderer>().enabled = true;
         isMovingMirror = false;
         collidingMirror = null;
     }
@@ -80,8 +82,17 @@ public class BallController : MonoBehaviour
         float movex = Input.GetAxisRaw("Horizontal");
         float movey = Input.GetAxisRaw("Vertical");
         body.AddRelativeForce(new Vector2(movex * inputSpeed, movey * inputSpeed));
+        float rotationDelta = 0;
+
+        if (Input.GetKey("z")) {
+            rotationDelta = 1.5f;
+        }
+        if (Input.GetKey("x")) {
+            rotationDelta = -1.5f;
+        }
 
         if (isMovingMirror && collidingMirror) {
+            collidingMirror.transform.Rotate(0, 0, rotationDelta);
             collidingMirror.transform.position = transform.position - mirrorPositionDifference;
         }
 

@@ -7,6 +7,11 @@ public class BallController : MonoBehaviour
     public float maxMoveSpeed = 50f;
     public float shiftMoveSpeed = 20f;
     private float inputSpeed = 0;
+
+    private float rotateSpeed = 0;
+    private float shiftRotateSpeed = 0.3f;
+    private float maxRotateSpeed = 1.5f;
+
     private Rigidbody2D body;
 
     public GameObject collidingMirror;
@@ -23,14 +28,15 @@ public class BallController : MonoBehaviour
 
     void Start() {
         body = GetComponent<Rigidbody2D>();
-        inputSpeed = maxMoveSpeed;
     }
 
     void Update() {
         inputSpeed = maxMoveSpeed;
+        rotateSpeed = maxRotateSpeed;
 
         if (Input.GetKey("left shift")) {
             inputSpeed = shiftMoveSpeed;
+            rotateSpeed = shiftRotateSpeed;
         }
 
         if (Input.GetKeyDown("space")) {
@@ -85,10 +91,10 @@ public class BallController : MonoBehaviour
         float rotationDelta = 0;
 
         if (Input.GetKey("z")) {
-            rotationDelta = 1.5f;
+            rotationDelta = rotateSpeed;
         }
         if (Input.GetKey("x")) {
-            rotationDelta = -1.5f;
+            rotationDelta = -rotateSpeed;
         }
 
         if (isMovingMirror && collidingMirror) {

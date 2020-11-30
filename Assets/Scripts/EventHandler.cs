@@ -22,11 +22,20 @@ public class EventHandler
     public delegate void PlayerIsMovingEvent();
     public static event PlayerIsMovingEvent onIsPlayerMoving;
 
+    public delegate void PlayerIsControllingObjectEvent();
+    public static event PlayerIsControllingObjectEvent onPlayerIsControllingObject;
+
+    public delegate void PlayerStopedControllingObjectEvent();
+    public static event PlayerStopedControllingObjectEvent onPlayerStopedControllingObject;
+
     public delegate void PlayerIsIdleEvent();
     public static event PlayerIsIdleEvent onIsPlayerIdle;
 
     public delegate void StepChangeEvent();
     public static event StepChangeEvent onStepChange;
+
+    public delegate void StepWillChangeEvent();
+    public static event StepChangeEvent onStepWillChange;
 
     private static EventHandler instance = null;
 
@@ -37,13 +46,27 @@ public class EventHandler
         return instance;
     }
 
+    public void notifyStepWillChange() {
+        if (onStepWillChange == null) return;
+        onStepWillChange();
+    }
+
     public void notifyStepChange() {
         if (onStepChange == null) return;
         onStepChange();
     }
 
+    public void notifyPlayerIsControllingObject() {
+        if (onPlayerIsControllingObject == null) return;
+        onPlayerIsControllingObject();
+    }
+
+    public void notifyPlayerStopedControllingObject() {
+        if (onPlayerStopedControllingObject == null) return;
+        onPlayerStopedControllingObject();
+    }
+
     public void notifyPlayerMoving() {
-        //Debug.Log("player is moving!");
         if (onIsPlayerMoving == null) return;
         onIsPlayerMoving();
     }

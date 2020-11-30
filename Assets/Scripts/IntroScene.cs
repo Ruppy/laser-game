@@ -34,12 +34,14 @@ public class IntroScene : MonoBehaviour {
 
     public int currentStep = 0;
     public int previousStep = 0;
-    private Animator animator;
 
     private EventHandler eventHandler = EventHandler.get();
+    private Tutorial tutorialController;
 
     void Start() {
         ﻿﻿﻿﻿DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(200, 10);
+
+        tutorialController = GameObject.Find("Tutorial").GetComponent<Tutorial>();
 
         scenes.Add(0, new List<GameObject>() { laserWhite, boxWhite, mirrorWhite });
         scenes.Add(1, new List<GameObject>() { mirrorBlack, boxBlack, laserBlack });
@@ -72,7 +74,6 @@ public class IntroScene : MonoBehaviour {
         blackText.text = "";
 
         enableScene(0);
-        animator = GameObject.Find("Puzzle").GetComponent<Animator>();
     }
 
     void Update() {
@@ -104,6 +105,7 @@ public class IntroScene : MonoBehaviour {
     }
 
     public void WillIncreaseStep() {
+        eventHandler.notifyStepWillChange();
         int nextStep = currentStep + 1;
         enableScene(nextStep);
 
@@ -118,6 +120,8 @@ public class IntroScene : MonoBehaviour {
             getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
             audioSource.PlayOneShot(bellsAudioMid);
+            tutorialController.ChangeText("mantenha o shift pressionado\npara ter mais precisao");
+            tutorialController.ChangeColor(Color.white);
         } else if (nextStep == 3) {
             toogleParticleSystemColor();
             wall02.GetComponent<SpriteRenderer>().DOFade(0f, 0.6f);
@@ -126,6 +130,7 @@ public class IntroScene : MonoBehaviour {
             mirrorBlack.transform.position = new Vector3(7.36f, 0f, 0f);
             mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudioLate);
+            tutorialController.ChangeText("");
         } else if (nextStep == 4) {
             toogleParticleSystemColor();
             getLocalizedPhrase("S1_P4", whiteText);

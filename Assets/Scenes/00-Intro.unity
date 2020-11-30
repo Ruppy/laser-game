@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 29909613}
   - component: {fileID: 29909615}
   - component: {fileID: 29909614}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,12 +225,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29909612}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.26, y: 0.08, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.004324436, y: 0.6075318, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
-  m_Father: {fileID: 468240826}
-  m_RootOrder: 13
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &29909614
 MonoBehaviour:
@@ -241,10 +241,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 29909612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b9a503fb5634df68bf781520f32efb, type: 3}
+  m_Script: {fileID: 11500000, guid: 307311eee868545308c627b752866523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialText: {fileID: 1034865363}
+  step: 0
+  sceneStep: 0
+  player: {fileID: 0}
 --- !u!61 &29909615
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -606,7 +609,7 @@ Transform:
   - {fileID: 1598349108}
   - {fileID: 1337459792}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &308622281
 MonoBehaviour:
@@ -792,7 +795,6 @@ Transform:
   - {fileID: 628202304}
   - {fileID: 717658618}
   - {fileID: 573209024}
-  - {fileID: 29909613}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1709,7 +1711,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1034865362
 GameObject:
@@ -1760,7 +1762,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: gire o espelho batendo nele
+  m_Text: 'controle de objetos
+
+    fique proximo e pressione espaco'
 --- !u!222 &1034865364
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1776,17 +1780,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1034865362}
-  m_LocalRotation: {x: 0, y: 0, z: -0.18197815, w: 0.9833026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 573209024}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20.97}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 315, y: -15.475}
-  m_SizeDelta: {x: 790.1, y: 61.05}
+  m_AnchoredPosition: {x: 200, y: 150.8}
+  m_SizeDelta: {x: 790.1, y: 91.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1051206173
 GameObject:
@@ -1941,7 +1945,7 @@ Transform:
   - {fileID: 642367561}
   - {fileID: 1857673640}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228591484
 GameObject:
@@ -7179,6 +7183,11 @@ PrefabInstance:
       propertyPath: laserHitParticleMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7302452808054371356, guid: dc52135453fe1405d952fd87e3d9833a,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 1025
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc52135453fe1405d952fd87e3d9833a, type: 3}
 --- !u!1 &1459506382 stripped
@@ -7798,7 +7807,7 @@ Transform:
   m_GameObject: {fileID: 1666987246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1583562792}
   m_RootOrder: 0

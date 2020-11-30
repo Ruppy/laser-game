@@ -7,6 +7,11 @@ public class BallController : MonoBehaviour
     public float maxMoveSpeed = 50f;
     public float shiftMoveSpeed = 20f;
     private float inputSpeed = 0;
+
+    private float rotateSpeed = 0;
+    private float shiftRotateSpeed = 0.3f;
+    private float maxRotateSpeed = 1.5f;
+
     private Rigidbody2D body;
 
     public GameObject collidingMirror;
@@ -23,14 +28,15 @@ public class BallController : MonoBehaviour
 
     void Start() {
         body = GetComponent<Rigidbody2D>();
-        inputSpeed = maxMoveSpeed;
     }
 
     void Update() {
         inputSpeed = maxMoveSpeed;
+        rotateSpeed = maxRotateSpeed;
 
         if (Input.GetKey("left shift")) {
             inputSpeed = shiftMoveSpeed;
+            rotateSpeed = shiftRotateSpeed;
         }
 
         if (Input.GetKeyDown("space")) {
@@ -58,6 +64,7 @@ public class BallController : MonoBehaviour
     }
 
     void StartDrag(GameObject dragObject) {
+        this.GetComponent<Renderer>().enabled = false;
         collidingMirror = dragObject;
         isMovingMirror = true;
         mirrorPositionDifference = transform.position - dragObject.transform.position;
@@ -68,6 +75,7 @@ public class BallController : MonoBehaviour
         if (collidingMirror) {
             collidingMirror.GetComponent<Collider2D>().isTrigger = false;
         }
+        this.GetComponent<Renderer>().enabled = true;
         isMovingMirror = false;
         collidingMirror = null;
     }
@@ -80,8 +88,17 @@ public class BallController : MonoBehaviour
         float movex = Input.GetAxisRaw("Horizontal");
         float movey = Input.GetAxisRaw("Vertical");
         body.AddRelativeForce(new Vector2(movex * inputSpeed, movey * inputSpeed));
+        float rotationDelta = 0;
+
+        if (Input.GetKey("z")) {
+            rotationDelta = rotateSpeed;
+        }
+        if (Input.GetKey("x")) {
+            rotationDelta = -rotateSpeed;
+        }
 
         if (isMovingMirror && collidingMirror) {
+            collidingMirror.transform.Rotate(0, 0, rotationDelta);
             collidingMirror.transform.position = transform.position - mirrorPositionDifference;
         }
 

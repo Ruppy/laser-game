@@ -588,12 +588,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 308622278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a591f7208af4469fa374288e7da1b88, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  mirror: {fileID: 0}
-  speed: 3
-  movementLock: 0
 --- !u!4 &308622280
 Transform:
   m_ObjectHideFlags: 0
@@ -6713,14 +6710,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468240826}
     m_Modifications:
-    - target: {fileID: 451270076, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
-      propertyPath: m_Mass
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 451270076, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
-      propertyPath: m_Constraints
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085116, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_Name
@@ -7273,10 +7262,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 468240826}
     m_Modifications:
-    - target: {fileID: 451270076, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
-      propertyPath: m_Constraints
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7308854007618085116, guid: 9c75ae23508ba49319ff62e1ed7b6e89,
         type: 3}
       propertyPath: m_Name
@@ -7337,7 +7322,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -35
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 576454219, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9c75ae23508ba49319ff62e1ed7b6e89, type: 3}
 --- !u!1 &1503413745 stripped
 GameObject:

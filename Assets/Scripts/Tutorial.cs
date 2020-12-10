@@ -93,13 +93,14 @@ public class Tutorial : MonoBehaviour {
             ChangeColor(Color.white);
         }
         else if (sceneStep == 0 && step == 1) {
-            ChangeText("use as setas ou WASD\npara se mover ate aqui");
+            ChangeText(getText("S1_T1"));
+            //updateTip("S1_T1");
             Show(true);
         }
         else if (sceneStep == 0 && step == 2) {
             tutorialText.text = "";
             DOTween.Sequence().SetEase(Ease.Linear)
-                .Append(tutorialText.DOText("muito bem!", 0.6f, false))
+                .Append(tutorialText.DOText(getText("S1_T2"), 0.6f, false))
                 .AppendInterval(2f)
                 .OnComplete(() => {
                     IncreaseStep();
@@ -107,24 +108,23 @@ public class Tutorial : MonoBehaviour {
         }
         else if (sceneStep == 0 && step == 3) {
             tutorialText.text = "";
-            tutorialText.DOText("chegue mais proximo e aperte barra de espaco\npara controlar objetos (como esse espelho)",
-                2.6f, false);
+            tutorialText.DOText(getText("S1_T3"), 2.6f, false);
         }
         else if (sceneStep == 0 && step == 4) {
             tutorialText.text = "";
-            tutorialText.DOText("agora descubra como passar de fase...",
+            tutorialText.DOText(getText("S1_T4"),
                 2.6f, false);
         }
         else if (sceneStep == 0 && step == 5) {
             Hide(true);
         }
         else if (sceneStep == 1 && step == 0) {
-            ChangeText("gire o espelho com Z e X");
+            ChangeText(getText("S1_T5"));
             ChangeColor(Color.black);
             Hide(false);
         }
         else if (sceneStep == 2 && step == 0) {
-            ChangeText("segure shift para\nmover e girar com precisao");
+            ChangeText(getText("S1_T6"));
             ChangeColor(Color.white);
             Hide(false);
         }
@@ -177,4 +177,13 @@ public class Tutorial : MonoBehaviour {
         tutorialText.DOFade(0f, seconds);
         tutorialText.transform.DOScale(0.7f, seconds);
     }
+    private string getText(string key) {
+        var op = UnityEngine.Localization.Settings.LocalizationSettings
+                    .StringDatabase.GetLocalizedStringAsync("Phrases", key);
+        System.Threading.Tasks.Task<string> dada = op.Task;
+        while (!op.IsDone) {
+        }
+        return op.Result;
+    }
+
 }

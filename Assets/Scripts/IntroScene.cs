@@ -111,7 +111,6 @@ public class IntroScene : MonoBehaviour {
 
         if (nextStep == 1) {
             toogleParticleSystemColor();
-            blackText.text = "about how life can feel bright";
             mirrorBlack.transform.rotation =  Quaternion.Euler(0, 0, 45);
             audioSource.PlayOneShot(bellsAudio);
             getLocalizedPhrase("S1_P1", blackText);
@@ -170,7 +169,9 @@ public class IntroScene : MonoBehaviour {
             toChange.text = text;
             return;
         }
-
+        if (text == null) {
+            return;
+        }
         float textSize = text.Length;
         float duration = textSize / 16f;
         toChange.text = "";

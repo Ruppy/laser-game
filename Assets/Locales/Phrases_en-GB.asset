@@ -19,14 +19,14 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 17758904320
-    m_Localized: about how life can feel bright
+    m_Localized: 'sometimes we even when feeling good,
+
+      something tries to
+      bring us to darkness again'
     m_Metadata:
       m_Items: []
   - m_Id: 102882304000
-    m_Localized: 'and yet, sometimes, very dark
-
-      and challenging to see it
-      bright again'
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 306423488512
@@ -41,17 +41,54 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 17945971613696
-    m_Localized: let's tell a story
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 19655330848768
     m_Localized: 'this is Lights
 
-      an essay about depression'
+      a essay about connections'
     m_Metadata:
       m_Items: []
   - m_Id: 19784301502464
     m_Localized: by Ruppy Studio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810722876219392
+    m_Localized: 'Use arrow keys or WASD
+
+      to move here'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810770011807744
+    m_Localized: very good!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810791184654336
+    m_Localized: 'press spacebar
+
+      to control this mirror'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810803100672000
+    m_Localized: 'now connect yourself
+
+      to bring lights'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810818632179712
+    m_Localized: 'press Z and X to rotate
+
+      the mirror and go back
+
+      to
+      darkness'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810830476894208
+    m_Localized: 'using Shift you
+
+      become more accurate'
     m_Metadata:
       m_Items: []
   references:

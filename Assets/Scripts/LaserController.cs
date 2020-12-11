@@ -16,7 +16,6 @@ public class LaserController : MonoBehaviour
     public LayerMask layerMask;
     public float laserOffset = 0.05f;
     public string hitIdentifier = "";
-    private MirrorController lastMirror;
     private EdgeCollider2D edgeCollider;
 
     private int totalOfLaserPoints;

@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
     private bool enabled = false;
     private bool isCanceling = false;
     private bool shouldWarnStepChange = true;
-    private MovementController movementScript;
     private GameObject scriptsObject;
     private bool isPlayerMoving = false;
     private bool isMainBoxGlowing = false;
@@ -61,7 +60,6 @@ public class CameraController : MonoBehaviour
         changeToColor = Color.yellow;
         enabled = false;
         scriptsObject = GameObject.Find("Scripts");
-        movementScript = scriptsObject.GetComponent<MovementController>();
         reloadObjectives();
     }
 

@@ -173,7 +173,7 @@ public class IntroScene : MonoBehaviour {
             return;
         }
         float textSize = text.Length;
-        float duration = textSize / 16f;
+        float duration = textSize / 25f;
         toChange.text = "";
         DOTween.Sequence().SetEase(Ease.Linear)
             .PrependInterval(delay)

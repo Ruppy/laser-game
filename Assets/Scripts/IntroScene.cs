@@ -17,6 +17,7 @@ public class IntroScene : MonoBehaviour {
     public Text blackText;
     public Text essayText;
     public Text ruppyText;
+    public Text sponsorText;
     public GameObject wall01;
     public GameObject wall02;
     public GameObject wall03;
@@ -97,11 +98,14 @@ public class IntroScene : MonoBehaviour {
 
         essayText.gameObject.SetActive(true);
         ruppyText.gameObject.SetActive(true);
+        sponsorText.gameObject.SetActive(true);
         DOTween.Sequence()
             .AppendInterval(3)
             .Append(whiteText.DOFade(0, 8))
             .Append(essayText.DOFade(1, 3.7f).From(0))
-            .Append(ruppyText.DOFade(1, 3.7f).From(0));
+            .Append(ruppyText.DOFade(1, 3.7f).From(0))
+            .AppendInterval(1.8f)
+            .Append(sponsorText.DOFade(1, 0.8f).From(0));
     }
 
     public void WillIncreaseStep() {

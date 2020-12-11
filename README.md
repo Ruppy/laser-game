@@ -8,6 +8,20 @@ Lights is a game about bringing light to dark places and reconnecting things. It
 
 All assets and necessary files are already included. Just load the project and hit run.
 
+## How to build
+
+```
+ctrl or cmd + b
+```
+
+If, after build, you have a buggy game, without boxes and/or texts, you have to
+build the Addresseables menu first with:
+
+```
+Menus -> Window -> Asset Management -> Addressables -> Groups.
+Then Build -> New Build -> Default Build Script (from the top bar).
+```
+
 ### Under heavy daily development
 
 by [Ruppy Studio](http://ruppy.com.br/pt-br/)

@@ -19,36 +19,61 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 17758904320
-    m_Localized: sobre como a vida pode ser brilhante
+    m_Localized: "as vezes mesmo nos sentindo bem, \nalgo nos urge para voltar a
+      escurid\xE3o"
     m_Metadata:
       m_Items: []
   - m_Id: 102882304000
-    m_Localized: 'mas, as vezes, bem escura
-
-      e dificil de brilhar novamente'
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 306423488512
-    m_Localized: "completamente normal sentir-se dos dois jeitos de vez em quando
-      \no problema surge quando fica mais simples ir para o escuro"
+    m_Localized: "\xE9 normal nos sentirmos dos dois jeitos de tempos em tempos\nmas
+      \xE9 preocupante quando fica mais f\xE1cil ir para o escuro"
     m_Metadata:
       m_Items: []
   - m_Id: 607301885952
-    m_Localized: e quase impossivel de voltar
+    m_Localized: "e quase imposs\xEDvel de voltar"
     m_Metadata:
       m_Items: []
   - m_Id: 17945971613696
-    m_Localized: vamos contar uma historia
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 19655330848768
-    m_Localized: 'Lights
-
-      um ensaio sobre depressao'
+    m_Localized: "Lights\num ensaio sobre conex\xF5es"
     m_Metadata:
       m_Items: []
   - m_Id: 19784301502464
     m_Localized: por Ruppy Studio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810722876219392
+    m_Localized: 'use as setas ou WASD
+
+      para se mover ate aqui'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810770011807744
+    m_Localized: muito bem!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810791184654336
+    m_Localized: 'aperte barra de espaco
+
+      para controlar esse espelho'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810803100672000
+    m_Localized: "agora conecte-se para\nque tudo fique claro \ne simples"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810818632179712
+    m_Localized: "aperte Z e X para girar\no espelho e cair de novo\nna escurid\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38810830476894208
+    m_Localized: "usando Shift voc\xEA\nfica mais preciso"
     m_Metadata:
       m_Items: []
   references:

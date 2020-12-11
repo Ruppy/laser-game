@@ -18,6 +18,8 @@ public class BallController : MonoBehaviour
     public bool isMovingMirror = false;
     public Vector3 mirrorPositionDifference;
 
+    private EventHandler eventHandler = EventHandler.get();
+
     private void OnEnable() {
         EventHandler.onStepChange += OnStepChange;
     }
@@ -69,6 +71,7 @@ public class BallController : MonoBehaviour
         isMovingMirror = true;
         mirrorPositionDifference = transform.position - dragObject.transform.position;
         collidingMirror.GetComponent<Collider2D>().isTrigger = true;
+        eventHandler.notifyPlayerIsControllingObject();
     }
 
     void CancelDrag() {
@@ -78,6 +81,7 @@ public class BallController : MonoBehaviour
         this.GetComponent<Renderer>().enabled = true;
         isMovingMirror = false;
         collidingMirror = null;
+        eventHandler.notifyPlayerStopedControllingObject();
     }
 
     public void OnStepChange() {
@@ -91,10 +95,10 @@ public class BallController : MonoBehaviour
         float rotationDelta = 0;
 
         if (Input.GetKey("z")) {
-            rotationDelta = rotateSpeed;
+            rotationDelta = 1.5f;
         }
         if (Input.GetKey("x")) {
-            rotationDelta = -rotateSpeed;
+            rotationDelta = -1.5f;
         }
 
         if (isMovingMirror && collidingMirror) {

@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "LaserPuzzle",
+"productVersion": "0.1",
+"dataUrl": "lasers.data.unityweb",
+"wasmCodeUrl": "lasers.wasm.code.unityweb",
+"wasmFrameworkUrl": "lasers.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.3.0f6"
+}

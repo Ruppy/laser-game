@@ -241,7 +241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 29909612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc7324da6c0fd43d188eb16f2c206497, type: 3}
+  m_Script: {fileID: 11500000, guid: 06dae46e9412a8744a3d0b99f8476de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialText: {fileID: 1034865363}
@@ -7552,7 +7552,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1583562791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5817cfde815f14ef4bd6698ae1c356b3, type: 3}
+  m_Script: {fileID: 11500000, guid: c7021d20645775446afe656ea52d0eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveSpeed: 50

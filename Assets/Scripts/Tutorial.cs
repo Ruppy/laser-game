@@ -180,9 +180,7 @@ public class Tutorial : MonoBehaviour {
     private string getText(string key) {
         var op = UnityEngine.Localization.Settings.LocalizationSettings
                     .StringDatabase.GetLocalizedStringAsync("Phrases", key);
-        System.Threading.Tasks.Task<string> dada = op.Task;
-        while (!op.IsDone) {
-        }
+        while (!op.IsDone) {}
         return op.Result;
     }
 

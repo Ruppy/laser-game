@@ -1,7 +1,7 @@
 {
 "companyName": "Ruppy Studio",
 "productName": "Lights",
-"productVersion": "0.9-dev",
+"productVersion": "0.1",
 "dataUrl": "web-build.data.unityweb",
 "wasmCodeUrl": "web-build.wasm.code.unityweb",
 "wasmFrameworkUrl": "web-build.wasm.framework.unityweb",

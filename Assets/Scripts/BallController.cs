@@ -38,7 +38,7 @@ public class BallController : MonoBehaviour
         inputSpeed = maxMoveSpeed;
         rotateSpeed = maxRotateSpeed;
 
-        if (Input.GetKey("left shift")) {
+        if (Input.GetKey("left shift") || Input.GetKey("right shift")) {
             inputSpeed = shiftMoveSpeed;
             rotateSpeed = shiftRotateSpeed;
         }

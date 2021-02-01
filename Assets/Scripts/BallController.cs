@@ -126,10 +126,10 @@ public class BallController : MonoBehaviour
         float rotationDelta = 0;
 
         if (Input.GetKey("z")) {
-            rotationDelta = 1.5f;
+            rotationDelta = rotateSpeed;
         }
         if (Input.GetKey("x")) {
-            rotationDelta = -1.5f;
+            rotationDelta = -rotateSpeed;
         }
 
         if (isMovingMirror && collidingMirror) {

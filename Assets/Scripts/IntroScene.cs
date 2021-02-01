@@ -120,6 +120,7 @@ public class IntroScene : MonoBehaviour {
             getLocalizedPhrase("S1_P1", blackText);
         } else if (nextStep == 2) {
             toogleParticleSystemColor();
+            blackText.text = "";
             getLocalizedPhrase("S1_P2", whiteText);
             boxWhite.transform.position = new Vector3(6.17f, -4.23f, 0f);
             audioSource.PlayOneShot(bellsAudioMid);

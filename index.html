@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Lights - by ruppy</title>
+    <title>Lights - by Ruppy Studio</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>
@@ -11,14 +11,50 @@
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/web-build.json", {onProgress: UnityProgress});
     </script>
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <link href="../css/grayscale.css" rel="stylesheet">
   </head>
-  <body>
+  <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">
+                    <!--<i class="fa fa-play-circle"></i>--><span class="light">Lights - um jogo sobre conex&otilde;es</span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="">
+                        <a href="https://github.com/Ruppy/laser-game" target="_blank">C&oacute;digo fonte</a>
+                    </li>
+                    <li class="">
+                        <a href="https://github.com/Ruppy/laser-game/discussions/categories/feedbacks" target="_blank">Deixe sua opinião</a>
+                    </li>
+                    <!--<li class="page-scroll">
+                        <a href="#presskit">Press Kit</a>
+                    </li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
     <div class="webgl-content">
       <div id="unityContainer" style="width: 1106px; height: 600px"></div>
-      <div class="footer">
-        <div class="webgl-logo"></div>
-        <div class="title">Lights, a game about connections</div>
-      </div>
     </div>
   </body>
 </html>

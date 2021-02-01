@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -797,8 +797,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "obrigado por jogar \u2764\uFE0F\n\nse quiser, deixe suas coment\xE1rios
-    abaixo."
+  m_Text: "obrigado por jogar <3\n\nse quiser, deixe sua opini\xE3o clicando no menu
+    acima"
 --- !u!222 &309117591
 CanvasRenderer:
   m_ObjectHideFlags: 0
